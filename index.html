@@ -1952,26 +1952,27 @@ function buildTodaySlide(){
     </div>
   `;
 
-  // Also update the date animation tokens below
-  const setTxt=(id,v)=>{const el=document.getElementById(id);if(el)el.childNodes[0].textContent=v;};
-  const setAll=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
-  setAll('s12-tok-day', dayUS);
-  setAll('s12-tok-month', monFrShort);
-  setAll('s12-tok-year', String(yrFr));
-  setAll('s12-us-day', dayUS);
-  setAll('s12-us-year', String(yrUS));
-  // Populate S10 date tokens too
-  const setEl=(id,v)=>{const el=document.getElementById(id);if(el)el.childNodes[0].textContent=v;};
-  const setElFull=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
-  setElFull('s10-tok-day', dayUS);
-  setElFull('s10-tok-month', monFrShort);
-  setElFull('s10-tok-year', String(yrFr));
-  setElFull('s10-us-day', dayUS);
-  setElFull('s10-us-year', String(yrUS));
-  const m10=document.getElementById('s10-us-month');
-  if(m10) m10.firstChild.textContent=monUS;
-  const r10=document.getElementById('s10-date-result');
-  if(r10) r10.textContent=`= ${usDate}`;
+  // Helper — setFull remplace le textContent, setFirst remplace le firstChild (pour les tokens avec <span> enfant)
+  const setFull=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+  const setFirst=(id,v)=>{const el=document.getElementById(id);if(el&&el.firstChild)el.firstChild.textContent=v;};
+
+  // S12 tokens
+  setFull('s12-tok-day',   dayUS);
+  setFull('s12-tok-month', monFrShort);
+  setFull('s12-tok-year',  String(yrFr));
+  setFull('s12-us-day',    dayUS);
+  setFull('s12-us-year',   String(yrUS));
+  setFirst('s12-us-month', monUS);
+  setFull('date-to-val',   `= ${usDate}`);
+
+  // S10 tokens
+  setFull('s10-tok-day',   dayUS);
+  setFull('s10-tok-month', monFrShort);
+  setFull('s10-tok-year',  String(yrFr));
+  setFull('s10-us-day',    dayUS);
+  setFull('s10-us-year',   String(yrUS));
+  setFirst('s10-us-month', monUS);
+  setFull('s10-date-result', `= ${usDate}`);
 }
 // Add blink-month keyframe via JS (CSS not yet in stylesheet)
 const blinkStyle=document.createElement('style');
