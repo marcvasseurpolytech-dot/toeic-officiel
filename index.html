@@ -287,14 +287,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
 ═══════════════════════════════════════════ */
 #s5 .card{padding:14px 18px;max-width:780px;width:90%}
 .cross-wrap{position:relative}
-.xline{
-  position:absolute;background:var(--red);border-radius:4px;
-  opacity:0;z-index:20;transition:height .65s ease,opacity .3s;
-}
-.xl1{width:5px;height:0%;top:0;left:22%;transform:rotate(38deg);transform-origin:top center}
-.xl2{width:5px;height:0%;top:0;right:22%;transform:rotate(-38deg);transform-origin:top center}
-#s5.active .xl1{opacity:1;height:130%;transition-delay:.5s}
-#s5.active .xl2{opacity:1;height:130%;transition-delay:.85s}
 
 .s5-warn{display:flex;align-items:center;gap:14px;margin-top:22px;
   opacity:0;transition:opacity .5s ease 1.4s}
@@ -743,15 +735,37 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
 <!-- ══ S1: TITRE ═══════════════════════════════════════ -->
 <div class="slide active" id="s1">
   <div class="slide-header"><span class="slide-brand"><strong>Polytech Lille</strong> — TOEIC Officiel</span><span style="color:rgba(255,255,255,.4);font-size:12px">Instructions</span></div>
-  <div class="content" style="display:flex;align-items:center;gap:clamp(20px,4vw,60px)">
-    <div class="s1-left-text">TOEIC test</div>
-    <div class="s1-divider"></div>
-    <div class="s1-right">
-      <div style="display:flex;align-items:center;gap:12px">
-        <div class="ets-circle"><span>ETS</span></div>
-        <div class="toeic-word">TOEIC<sup style="font-size:.32em;vertical-align:super">®</sup></div>
+
+  <!-- Background video loop from Polytech site -->
+  <video autoplay muted loop playsinline
+    style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.18;pointer-events:none;z-index:0">
+    <source src="https://www.polytech-lille.fr/wp-content/themes/polytech/assets/video/logo-polytech-blanc2.mp4" type="video/mp4">
+  </video>
+
+  <div class="content" style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:clamp(16px,3vw,40px)">
+
+    <!-- Polytech logo from their site -->
+    <img src="https://www.polytech-lille.fr/wp-content/uploads/2025/01/logo.png"
+      alt="Polytech Lille"
+      style="height:clamp(60px,8vw,110px);opacity:0;transition:opacity .8s ease .3s;filter:brightness(0) invert(1)"
+      id="polytech-logo"
+      onerror="this.style.display='none'">
+
+    <div style="display:flex;align-items:center;gap:clamp(16px,3vw,50px)">
+      <div class="s1-left-text">TOEIC test</div>
+      <div class="s1-divider"></div>
+      <div class="s1-right">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="ets-circle"><span>ETS</span></div>
+          <div class="toeic-word">TOEIC<sup style="font-size:.32em;vertical-align:super">®</sup></div>
+        </div>
+        <div class="toeic-sub" id="s1sub">Listening &amp; Reading Test</div>
       </div>
-      <div class="toeic-sub" id="s1sub">Listening &amp; Reading Test</div>
+    </div>
+
+    <div style="font-size:clamp(12px,1.4vw,18px);color:rgba(255,255,255,.4);letter-spacing:3px;font-weight:300;
+      opacity:0;transition:opacity .8s ease 1.8s" id="s1-school">
+      École d'ingénieurs — Université de Lille
     </div>
   </div>
 </div>
@@ -856,8 +870,18 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
         <div class="bwrap" id="id-bub-wrap" style="margin-top:4px"></div>
       </div>
     </div>
-    <div class="xline xl1"></div>
-    <div class="xline xl2"></div>
+    <!-- Big centred SVG cross — no side lines -->
+    <svg id="s5-cross" viewBox="0 0 100 100" preserveAspectRatio="none"
+      style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:20;opacity:0;transition:opacity .4s ease">
+      <line x1="4" y1="4" x2="96" y2="96" stroke="#C0392B" stroke-width="5" stroke-linecap="round"
+        stroke-dasharray="130" stroke-dashoffset="130">
+        <animate attributeName="stroke-dashoffset" from="130" to="0" dur="0.55s" begin="s5-cross.load" fill="freeze" id="cross-l1"/>
+      </line>
+      <line x1="96" y1="4" x2="4" y2="96" stroke="#C0392B" stroke-width="5" stroke-linecap="round"
+        stroke-dasharray="130" stroke-dashoffset="130">
+        <animate attributeName="stroke-dashoffset" from="130" to="0" dur="0.55s" begin="cross-l1.end+0.1s" fill="freeze"/>
+      </line>
+    </svg>
   </div>
   <div class="s5-warn">
     <div class="fno-big">☝️</div>
@@ -1834,7 +1858,17 @@ function onEnter(id){
   }
 
   switch(id){
-    case 's1':setTimeout(()=>document.getElementById('s1sub').style.opacity='1',1600);break;
+    case 's1':
+      setTimeout(()=>document.getElementById('s1sub').style.opacity='1',1600);
+      setTimeout(()=>{
+        const logo=document.getElementById('polytech-logo');
+        if(logo) logo.style.opacity='1';
+      },300);
+      setTimeout(()=>{
+        const sch=document.getElementById('s1-school');
+        if(sch) sch.style.opacity='1';
+      },1800);
+      break;
     case 's3':setTimeout(animateName,400);break;
     case 's4a':
       document.getElementById('sex-m').classList.remove('filled');
@@ -1858,6 +1892,24 @@ function onEnter(id){
       animateDigitCols('lang-dcols',['4','3','4']);
       setInterval(()=>animateDigitCols('lang-dcols',['4','3','4']),6000);
       break;
+    case 's5':{
+      // Show SVG, restart animation in loop
+      const svg=document.getElementById('s5-cross');
+      function triggerCross(){
+        if(!svg)return;
+        svg.style.opacity='1';
+        // Reset both lines then retrigger via cloneNode trick
+        svg.querySelectorAll('animate').forEach(a=>{
+          a.setAttribute('begin','indefinite');
+        });
+        const anims=svg.querySelectorAll('animate');
+        if(anims[0]) anims[0].beginElement();
+        setTimeout(()=>{if(anims[1]) anims[1].beginElement();},650);
+      }
+      triggerCross();
+      setInterval(triggerCross,3500);
+      break;
+    }
     case 's6':setTimeout(animateDobLoop,400);break;
     case 's7':setTimeout(animateS7,300);break;
     case 's8':setTimeout(animateS8,400);break;
