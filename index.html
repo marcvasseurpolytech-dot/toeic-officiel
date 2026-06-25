@@ -1137,6 +1137,24 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
       </div>
     </div>
 
+    <!-- Test audio — en dessous de la signature -->
+    <div style="display:flex;align-items:center;gap:clamp(16px,2.5vw,36px);
+      background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+      border-radius:12px;padding:14px 22px;backdrop-filter:blur(4px)">
+      <div class="ear-wrap" style="font-size:clamp(50px,8vw,90px);line-height:1">
+        👂<span class="fq">?</span><span class="fq">?</span><span class="fq">?</span>
+      </div>
+      <div>
+        <div style="font-size:clamp(16px,2.2vw,26px);font-weight:700;color:#fff;margin-bottom:4px">
+          Test Audio — Listening Section
+        </div>
+        <div style="font-size:clamp(12px,1.5vw,17px);color:rgba(255,255,255,.55);line-height:1.6">
+          Écoutez attentivement et répondez aux<br>
+          <strong style="color:var(--or)">100 questions</strong> de la partie Listening.
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -1166,49 +1184,38 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
   </div>
 </div>
 
-<!-- ══ S12: DATE DU JOUR + TEST AUDIO ══════════════════ -->
+<!-- ══ S12: DATE DU JOUR ══════════════════════════════ -->
 <div class="slide" id="s12">
   <div class="slide-header"><span class="slide-brand"><strong>Polytech Lille</strong> — TOEIC Officiel</span></div>
-  <div style="width:94%;max-width:1100px;display:flex;gap:clamp(16px,2.5vw,40px);align-items:flex-start">
+  <div style="width:92%;max-width:900px;display:flex;flex-direction:column;gap:14px">
 
-    <!-- LEFT: date du jour -->
-    <div style="flex:1.4;display:flex;flex-direction:column;gap:14px">
-      <div class="card" style="padding:16px 24px;text-align:center">
-        <div class="card-orange-top"></div>
-        <div class="today-title" id="today-title">📅 Date d'aujourd'hui</div>
-        <div class="today-date-big" id="today-date-big"></div>
-        <div class="today-note" id="today-note"></div>
-        <div class="today-format-row" id="today-format-row"></div>
-      </div>
-      <div class="s10-date-wrap show" id="date-anim-wrap">
-        <div class="s10-date-lbl">⚠️ Format américain :</div>
-        <div class="s10-tokens">
-          <div class="s10-tok t-day" id="s12-tok-day">23</div>
-          <div class="s10-tok t-month" id="s12-tok-month">oct.</div>
-          <div class="s10-tok t-year" id="s12-tok-year">2025</div>
-        </div>
-        <div class="s10-arrow">→</div>
-        <div class="s10-tokens">
-          <div class="s10-tok t-month" style="position:relative" id="s12-us-month">10
-            <span style="position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);
-              font-size:clamp(8px,.9vw,11px);color:var(--or);white-space:nowrap;font-weight:700">mois !</span>
-          </div>
-          <div class="s10-tok t-sep">/</div>
-          <div class="s10-tok t-day" id="s12-us-day">23</div>
-          <div class="s10-tok t-sep">/</div>
-          <div class="s10-tok t-year" id="s12-us-year">2025</div>
-        </div>
-        <div class="s10-result show" id="date-to-val">= 10/23/2025</div>
-      </div>
+    <div class="card" style="padding:16px 24px;text-align:center">
+      <div class="card-orange-top"></div>
+      <div class="today-title" id="today-title">📅 Date d'aujourd'hui</div>
+      <div class="today-date-big" id="today-date-big"></div>
+      <div class="today-note" id="today-note"></div>
+      <div class="today-format-row" id="today-format-row"></div>
     </div>
 
-    <!-- RIGHT: test audio -->
-    <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding-top:20px">
-      <div class="ear-wrap" style="font-size:clamp(80px,14vw,160px)">👂<span class="fq">?</span><span class="fq">?</span><span class="fq">?</span></div>
-      <div class="audio-title" style="font-size:clamp(16px,2.2vw,28px)">Test Audio</div>
-      <div style="font-size:clamp(12px,1.5vw,18px);color:rgba(255,255,255,.55);text-align:center;line-height:1.6">
-        Listening Section<br>100 questions
+    <div class="s10-date-wrap show" id="date-anim-wrap">
+      <div class="s10-date-lbl">⚠️ Format américain :</div>
+      <div class="s10-tokens">
+        <div class="s10-tok t-day" id="s12-tok-day">23</div>
+        <div class="s10-tok t-month" id="s12-tok-month">oct.</div>
+        <div class="s10-tok t-year" id="s12-tok-year">2025</div>
       </div>
+      <div class="s10-arrow">→</div>
+      <div class="s10-tokens">
+        <div class="s10-tok t-month" style="position:relative" id="s12-us-month">10
+          <span style="position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);
+            font-size:clamp(8px,.9vw,11px);color:var(--or);white-space:nowrap;font-weight:700">mois !</span>
+        </div>
+        <div class="s10-tok t-sep">/</div>
+        <div class="s10-tok t-day" id="s12-us-day">23</div>
+        <div class="s10-tok t-sep">/</div>
+        <div class="s10-tok t-year" id="s12-us-year">2025</div>
+      </div>
+      <div class="s10-result show" id="date-to-val">= 10/23/2025</div>
     </div>
 
   </div>
@@ -1272,7 +1279,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
 /* ══════════════════════════════════════════
    SLIDE ENGINE
 ══════════════════════════════════════════ */
-const SLIDES=['s1','s2','s3','s4a','s4b','s4c','s5','s6','s7','s8','s9','s10','s11','s12','s13','s15','s16'];
+const SLIDES=['s1','s2','s3','s4a','s4b','s4c','s5','s6','s7','s8','s9','s10','s11','s12','s15','s16'];
 const TOTAL=SLIDES.length;
 let cur=0;
 const ctrEl=document.getElementById('ctr');
