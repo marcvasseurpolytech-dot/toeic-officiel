@@ -269,14 +269,15 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
 
 .flag-grid{display:flex;flex-wrap:wrap;gap:8px;padding:10px 14px;justify-content:center;max-width:480px}
 .flag-item{
-  display:flex;align-items:center;gap:8px;
-  background:#f9f9f9;border:1.5px solid #ddd;border-radius:8px;
-  padding:7px 14px;font-size:clamp(13px,1.7vw,19px);
-  opacity:0;transform:translateY(8px);transition:all .35s ease;
+  display:flex;align-items:center;gap:12px;
+  background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);border-radius:10px;
+  padding:10px 18px;font-size:clamp(16px,2.2vw,26px);
+  color:#fff;
+  backdrop-filter:blur(4px);
 }
 .flag-item.show{opacity:1;transform:translateY(0)}
-.flag-em{font-size:clamp(18px,2.5vw,28px)}
-.flag-code{font-weight:900;color:var(--navy);font-size:clamp(14px,2vw,22px);margin-left:4px}
+.flag-em{font-size:clamp(22px,3vw,36px)}
+.flag-code{font-weight:900;color:var(--or);font-size:clamp(18px,2.5vw,30px);margin-left:4px}
 
 /* ═══════════════════════════════════════════
    SLIDE 5 — ID NUMBER (barré + doigt)
@@ -529,8 +530,9 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
 .fasc-name-lbl{font-size:10px;color:#555;flex-shrink:0}
 .fasc-name-typed{
   font-family:'Comic Sans MS','Segoe Script',cursive;
-  font-size:clamp(14px,2vw,22px);font-weight:700;letter-spacing:2px;
-  color:#111;overflow:hidden;max-width:0;white-space:nowrap;display:inline-block;
+  font-size:clamp(16px,2.2vw,24px);font-weight:700;letter-spacing:3px;
+  color:#1a1a1a;overflow:hidden;max-width:0;white-space:nowrap;display:inline-block;
+  text-shadow:none;
 }
 .fasc-barcode-area{text-align:right;font-size:11px;color:#555}
 .fasc-bars{background:#000;color:#fff;padding:2px 8px;font-size:9px;letter-spacing:3px;margin-top:4px}
@@ -559,16 +561,16 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
    SLIDE 12 — DATE (aujourd'hui)
 ═══════════════════════════════════════════ */
 #s12 .card{padding:22px 30px;width:90%;max-width:800px;text-align:center}
-.today-title{font-size:clamp(18px,2.5vw,30px);color:var(--or);font-weight:700;margin-bottom:18px}
-.today-date-big{font-size:clamp(36px,7vw,90px);font-weight:900;color:#fff;
-  text-shadow:0 4px 20px rgba(0,0,0,.4);
+.today-title{font-size:clamp(20px,2.8vw,38px);color:var(--or);font-weight:700;margin-bottom:18px}
+.today-date-big{font-size:clamp(52px,10vw,120px);font-weight:900;color:#fff;
+  text-shadow:0 4px 30px rgba(232,119,34,.5);letter-spacing:4px;
   opacity:0;transform:scale(.5);transition:all .8s cubic-bezier(.34,1.3,.64,1) .5s}
 #s12.active .today-date-big{opacity:1;transform:scale(1)}
-.today-note{font-size:clamp(13px,1.8vw,20px);color:rgba(255,255,255,.7);margin-top:14px;
+.today-note{font-size:clamp(16px,2.2vw,26px);color:#fff;margin-top:16px;font-weight:300;
   opacity:0;transition:opacity .6s ease 1.1s}
 #s12.active .today-note{opacity:1}
 .today-format-row{
-  display:flex;align-items:center;gap:14px;justify-content:center;margin-top:18px;
+  display:flex;align-items:center;gap:12px;justify-content:center;margin-top:20px;flex-wrap:wrap;
   opacity:0;transition:opacity .6s ease 1.4s;
 }
 #s12.active .today-format-row{opacity:1}
@@ -579,6 +581,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
 #s13 .content{display:flex;flex-direction:column;align-items:center;gap:22px;width:90%;max-width:900px}
 .warn-big{font-size:clamp(60px,12vw,140px);animation:warn-pulse 1.5s ease-in-out infinite}
 @keyframes warn-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+@keyframes siren-spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
 .warn-card{
   background:rgba(192,57,43,.12);border:3px solid var(--red);
   border-radius:14px;padding:24px 36px;
@@ -611,7 +614,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
 /* ═══════════════════════════════════════════
    SLIDE 15 — READY
 ═══════════════════════════════════════════ */
-#s15 .content{display:flex;flex-direction:column;align-items:center;gap:16px;position:relative;z-index:1}
+#s16 .content{display:flex;flex-direction:column;align-items:center;gap:16px;position:relative;z-index:1}
 .abcd-ring{position:relative;width:clamp(220px,32vw,400px);height:clamp(70px,10vw,110px);margin-bottom:-10px}
 .abcd-l{
   position:absolute;border-radius:50%;
@@ -636,12 +639,12 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
 @keyframes levitate{0%,100%{transform:translateY(0)}50%{transform:translateY(-22px)}}
 .ready-word{font-size:clamp(50px,10vw,120px);font-weight:200;color:#fff;letter-spacing:6px;
   opacity:0;transform:translateY(30px);transition:all .9s ease .6s}
-#s15.active .ready-word{opacity:1;transform:translateY(0)}
+#s16.active .ready-word{opacity:1;transform:translateY(0)}
 .ready-sub{font-size:clamp(14px,2vw,24px);color:rgba(255,255,255,.55);letter-spacing:4px;font-weight:300;
   opacity:0;transition:opacity .8s ease 1.2s}
-#s15.active .ready-sub{opacity:1}
+#s16.active .ready-sub{opacity:1}
 .dots{display:flex;gap:10px;margin-top:6px;opacity:0;transition:opacity .6s ease 1.7s}
-#s15.active .dots{opacity:1}
+#s16.active .dots{opacity:1}
 .dot{width:12px;height:12px;border-radius:50%;background:var(--or);
   animation:dot-pulse 1.4s ease-in-out infinite}
 .dot:nth-child(1){animation-delay:0s}
@@ -730,26 +733,34 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
 <!-- ══ S4b: COUNTRY CODE ══════════════════════════════ -->
 <div class="slide" id="s4b">
   <div class="slide-header"><span class="slide-brand"><strong>Polytech Lille</strong> — TOEIC Officiel</span></div>
-  <div class="s4-wrap" id="s4b-wrap">
-    <div class="sub-title-dark">Section 3 — COUNTRY CODE</div>
-    <div class="zoom-card" id="s4b-card">
-      <div class="z-hdr"><div class="z-num">3</div><div class="z-lbl">COUNTRY CODE</div></div>
-      <div class="digit-cols" id="country-dcols"></div>
-      <div class="flag-grid" id="country-flags"></div>
+  <div style="display:flex;align-items:center;gap:clamp(20px,4vw,60px);padding:0 4%;width:100%;justify-content:center" id="s4b-wrap">
+    <!-- LEFT: zoomed grid -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
+      <div style="color:rgba(255,255,255,.7);font-size:clamp(14px,1.8vw,20px);font-weight:300">Section 3</div>
+      <div class="zoom-card" id="s4b-card">
+        <div class="z-hdr"><div class="z-num">3</div><div class="z-lbl">COUNTRY CODE</div></div>
+        <div class="digit-cols" id="country-dcols"></div>
+      </div>
     </div>
+    <!-- RIGHT: country list, always visible -->
+    <div style="display:flex;flex-direction:column;gap:10px;min-width:280px" id="country-flags"></div>
   </div>
 </div>
 
 <!-- ══ S4c: LANGUAGE CODE ═════════════════════════════ -->
 <div class="slide" id="s4c">
   <div class="slide-header"><span class="slide-brand"><strong>Polytech Lille</strong> — TOEIC Officiel</span></div>
-  <div class="s4-wrap" id="s4c-wrap">
-    <div class="sub-title-dark">Section 4 — LANGUAGE CODE</div>
-    <div class="zoom-card" id="s4c-card">
-      <div class="z-hdr"><div class="z-num">4</div><div class="z-lbl">LANGUAGE CODE</div></div>
-      <div class="digit-cols" id="lang-dcols"></div>
-      <div class="flag-grid" id="lang-flags"></div>
+  <div style="display:flex;align-items:center;gap:clamp(20px,4vw,60px);padding:0 4%;width:100%;justify-content:center" id="s4c-wrap">
+    <!-- LEFT: zoomed grid -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
+      <div style="color:rgba(255,255,255,.7);font-size:clamp(14px,1.8vw,20px);font-weight:300">Section 4</div>
+      <div class="zoom-card" id="s4c-card">
+        <div class="z-hdr"><div class="z-num">4</div><div class="z-lbl">LANGUAGE CODE</div></div>
+        <div class="digit-cols" id="lang-dcols"></div>
+      </div>
     </div>
+    <!-- RIGHT: language list, always visible -->
+    <div style="display:flex;flex-direction:column;gap:10px;min-width:280px" id="lang-flags"></div>
   </div>
 </div>
 
@@ -872,16 +883,9 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
       </div>
     </div>
     <div class="s8-right">
-      <div class="fno-big" style="animation:wag .7s ease-in-out infinite;font-size:clamp(40px,6vw,80px)">☝️</div>
       <div class="s8-note">À compléter avec le<br><strong>questionnaire plastifié</strong><br>sur vos tables</div>
       <div class="plastif-icon">📋</div>
-      <div class="stats-bars" id="stats-bars">
-        <div class="stat-bar" style="height:10px"></div>
-        <div class="stat-bar" style="height:10px"></div>
-        <div class="stat-bar" style="height:10px"></div>
-        <div class="stat-bar" style="height:10px"></div>
-        <div class="stat-bar" style="height:10px"></div>
-      </div>
+      <div id="algo-display" style="font-family:monospace;font-size:clamp(11px,1.4vw,16px);color:#4ade80;background:rgba(0,0,0,.3);border-radius:8px;padding:10px 14px;min-width:220px;text-align:left;line-height:1.8;letter-spacing:1px"></div>
       <div style="font-size:clamp(10px,1.3vw,14px);color:#888;text-align:center">(statistiques ETC uniquement)</div>
     </div>
   </div>
@@ -998,7 +1002,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
 <div class="slide" id="s13">
   <div class="slide-header"><span class="slide-brand"><strong>Polytech Lille</strong> — TOEIC Officiel</span></div>
   <div class="content">
-    <div class="warn-big">🚨</div>
+    <div style="font-size:clamp(70px,14vw,160px);animation:siren-spin 0.8s linear infinite;display:inline-block;filter:drop-shadow(0 0 30px rgba(255,50,50,.8))">🚨</div>
     <div class="warn-card">
       <div class="warn-main">
         Il est <span>interdit</span> d'écrire sur les fascicules.<br>
@@ -1018,12 +1022,39 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
   <div class="content">
     <div class="ear-wrap">👂<span class="fq">?</span><span class="fq">?</span><span class="fq">?</span></div>
     <div class="audio-title">Test Audio — Listening Section</div>
-    <div class="audio-note">Écoutez attentivement.<br>Répondez aux <strong style="color:var(--or)">100 questions</strong> de la partie Listening.</div>
   </div>
 </div>
 
-<!-- ══ S15: READY ═════════════════════════════════════ -->
+<!-- ══ S15: DÉCALAGE WARNING ════════════════════════ -->
 <div class="slide" id="s15">
+  <div class="slide-header"><span class="slide-brand"><strong>Polytech Lille</strong> — TOEIC Officiel</span></div>
+  <div class="content" style="display:flex;flex-direction:column;align-items:center;gap:24px;width:90%;max-width:900px">
+    <div style="font-size:clamp(60px,11vw,120px);animation:warn-pulse 1.5s ease-in-out infinite">⚠️</div>
+    <div style="background:rgba(232,119,34,.15);border:3px solid var(--or);border-radius:14px;padding:28px 40px;text-align:center;
+      opacity:0;transform:translateY(20px);transition:all .7s ease .4s" id="s15-card">
+      <div style="font-size:clamp(18px,2.8vw,34px);font-weight:700;color:#fff;line-height:1.7;margin-bottom:14px">
+        Attention de ne pas <span style="color:var(--or)">décaler vos réponses</span> !
+      </div>
+      <div style="font-size:clamp(15px,2vw,24px);color:rgba(255,255,255,.85);line-height:1.9">
+        Vérifiez toujours le <strong style="color:#4ade80">numéro de la question</strong><br>
+        et celui de votre <strong style="color:#4ade80">réponse sur la feuille</strong>.
+      </div>
+    </div>
+    <!-- Animated number check visual -->
+    <div id="decalage-demo" style="display:flex;align-items:center;gap:20px;opacity:0;transition:opacity .5s ease 1s">
+      <div style="font-size:clamp(14px,1.8vw,20px);color:rgba(255,255,255,.7);text-align:center">
+        Question<br><span style="font-size:clamp(28px,4vw,52px);font-weight:900;color:#4ade80" id="q-num">47</span>
+      </div>
+      <div style="font-size:clamp(24px,4vw,50px);color:var(--or)" id="check-arrow">↔</div>
+      <div style="font-size:clamp(14px,1.8vw,20px);color:rgba(255,255,255,.7);text-align:center">
+        Réponse<br><span style="font-size:clamp(28px,4vw,52px);font-weight:900;color:#4ade80" id="r-num">47</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ S16: READY ═════════════════════════════════════ -->
+<div class="slide" id="s16">
   <div class="slide-header"><span class="slide-brand"><strong>Polytech Lille</strong> — TOEIC Officiel</span></div>
   <div class="content">
     <div class="abcd-ring">
@@ -1052,7 +1083,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
 /* ══════════════════════════════════════════
    SLIDE ENGINE
 ══════════════════════════════════════════ */
-const SLIDES=['s1','s2','s3','s4a','s4b','s4c','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'];
+const SLIDES=['s1','s2','s3','s4a','s4b','s4c','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16'];
 const TOTAL=SLIDES.length;
 let cur=0;
 const ctrEl=document.getElementById('ctr');
@@ -1247,16 +1278,14 @@ async function animateDigitCols(containerId,digits){
 }
 function buildFlags(containerId,flags){
   const c=document.getElementById(containerId);c.innerHTML='';
-  flags.forEach((f,i)=>{
-    const item=document.createElement('div');item.className='flag-item';item.id=`fi-${containerId}-${i}`;
+  flags.forEach((f)=>{
+    const item=document.createElement('div');item.className='flag-item show';
     item.innerHTML=`<span class="flag-em">${f.flag}</span><span>${f.name}</span><span class="flag-code">${f.code}</span>`;
     c.appendChild(item);
   });
 }
-async function animateFlags(containerId,count){
-  for(let i=0;i<count;i++){await delay(240+i*160);const el=document.getElementById(`fi-${containerId}-${i}`);if(el)el.classList.add('show');}
-}
-function resetFlags(containerId){document.querySelectorAll(`[id^="fi-${containerId}-"]`).forEach(el=>el.classList.remove('show'));}
+async function animateFlags(){}  // flags now always visible
+function resetFlags(){}          // no reset needed
 
 /* ══════════════════════════════════════════
    SLIDE 5 — ID grid
@@ -1384,24 +1413,41 @@ function buildQRGrid(){
   }
 }
 let s8LoopTimer=null;
+let algoInterval=null;
+const ALGO_LINES=[
+  'ETS_STATS.compute()',
+  'Σ score_i / n = μ',
+  'f(x) = ax² + bx + c',
+  '0110 1001 0011 1010',
+  'CECRL_level(μ) → B1',
+  '1001 0110 1100 0101',
+  'variance(X) < 0.02',
+  'P(L>495) = 0.73',
+  '0010 1111 0101 1000',
+  'norm.dist(μ, σ²)',
+];
+function startAlgo(){
+  const el=document.getElementById('algo-display');
+  if(!el)return;
+  let li=0;
+  algoInterval=setInterval(()=>{
+    const lines=ALGO_LINES.slice(li%ALGO_LINES.length,(li%ALGO_LINES.length)+4);
+    el.innerHTML=lines.map((l,i)=>`<div style="opacity:${1-i*0.18};color:${i===0?'#4ade80':'#22d3ee'}">${l}</div>`).join('');
+    li++;
+  },650);
+}
+function stopAlgo(){clearInterval(algoInterval);}
+
 async function animateS8(){
   clearTimeout(s8LoopTimer);
   const x1=document.getElementById('qrx1'),x2=document.getElementById('qrx2');
   if(x1){x1.style.opacity='0';x1.style.height='0%';x1.style.transitionDelay='0s';}
   if(x2){x2.style.opacity='0';x2.style.height='0%';x2.style.transitionDelay='0s';}
-  // Stats bars reset
-  document.querySelectorAll('.stat-bar').forEach(b=>b.style.height='10px');
+  stopAlgo();startAlgo();
 
   await delay(600);
   if(x1){x1.style.opacity='1';x1.style.height='135%';x1.style.transitionDelay='.5s';}
   if(x2){x2.style.opacity='1';x2.style.height='135%';x2.style.transitionDelay='.85s';}
-
-  // Animate stats bars
-  await delay(1400);
-  const heights=[38,55,44,62,48];
-  document.querySelectorAll('.stat-bar').forEach((b,i)=>{
-    setTimeout(()=>b.style.height=heights[i]+'px',i*150);
-  });
 
   s8LoopTimer=setTimeout(animateS8,6000);
 }
@@ -1521,12 +1567,13 @@ async function animateSig(){
   const dtTo=document.getElementById('date-to-val');if(dtTo)dtTo.classList.remove('show');
 
   await delay(400);
-  await typeIn(document.getElementById('sig-a'),document.getElementById('pc-siga'),'I hereby agree to the conditions set forth at ets.org/toeic',35);
+  await typeIn(document.getElementById('sig-a'),document.getElementById('pc-siga'),'I hereby agree to the conditions set forth at ets.org/toeic',38);
   await delay(400);
-  await typeIn(document.getElementById('sig-s'),document.getElementById('pc-sigs'),'~ Vasseur M.  ✓',80);
-  await delay(500);
+  // Buzz Lightyear signature
+  await typeIn(document.getElementById('sig-s'),document.getElementById('pc-sigs'),'𝓑𝓾𝔃𝔃 𝓛𝓲𝓰𝓱𝓽𝔂𝓮𝓪𝓻  ~∞~✦',90);
+  await delay(600);
   if(dtWrap)dtWrap.classList.add('show');
-  await delay(700);
+  await delay(800);
   if(dtTo)dtTo.classList.add('show');
 
   s10LoopTimer=setTimeout(animateSig,7000);
@@ -1584,17 +1631,35 @@ function buildTodaySlide(){
   const frDate=`${dayFr} ${monFr} ${yrFr}`;
 
   document.getElementById('today-date-big').textContent=usDate;
-  document.getElementById('today-note').innerHTML=`${frDate} → <strong style="color:var(--or)">${usDate}</strong> (MM/DD/YYYY)`;
+  document.getElementById('today-note').innerHTML=
+    `<span style="font-size:.85em;color:rgba(255,255,255,.6)">${frDate}</span>
+     <span style="color:var(--or);font-size:1.4em;margin:0 10px">→</span>
+     <strong style="color:#fff">${usDate}</strong>
+     <span style="color:rgba(255,255,255,.5);font-size:.8em;margin-left:8px">(MM/DD/YYYY)</span>`;
 
   const frow=document.getElementById('today-format-row');
+  // Big annotated tokens with labels and blinking month
   frow.innerHTML=`
-    <span style="padding:5px 12px;border-radius:6px;background:#ffe0b2;color:#e65100;font-weight:900;font-size:clamp(14px,2vw,24px)">${monUS}</span>
-    <span style="color:rgba(255,255,255,.5);font-size:1.5em">/</span>
-    <span style="padding:5px 12px;border-radius:6px;background:#c8e6c9;color:#1b5e20;font-weight:900;font-size:clamp(14px,2vw,24px)">${dayUS}</span>
-    <span style="color:rgba(255,255,255,.5);font-size:1.5em">/</span>
-    <span style="padding:5px 12px;border-radius:6px;background:#e3f2fd;color:#0d47a1;font-weight:900;font-size:clamp(14px,2vw,24px)">${yrUS}</span>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+      <span id="tok-mm" style="padding:10px 18px;border-radius:10px;background:#e65100;color:#fff;font-weight:900;font-size:clamp(24px,3.5vw,48px);animation:blink-month 1.2s ease-in-out infinite">${monUS}</span>
+      <span style="font-size:clamp(11px,1.3vw,15px);color:rgba(255,255,255,.6)">MOIS ← ici</span>
+    </div>
+    <span style="color:rgba(255,255,255,.4);font-size:clamp(22px,3vw,42px)">/</span>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+      <span style="padding:10px 18px;border-radius:10px;background:#1b5e20;color:#fff;font-weight:900;font-size:clamp(24px,3.5vw,48px)">${dayUS}</span>
+      <span style="font-size:clamp(11px,1.3vw,15px);color:rgba(255,255,255,.6)">JOUR</span>
+    </div>
+    <span style="color:rgba(255,255,255,.4);font-size:clamp(22px,3vw,42px)">/</span>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+      <span style="padding:10px 18px;border-radius:10px;background:#0d47a1;color:#fff;font-weight:900;font-size:clamp(24px,3.5vw,48px)">${yrUS}</span>
+      <span style="font-size:clamp(11px,1.3vw,15px);color:rgba(255,255,255,.6)">ANNÉE</span>
+    </div>
   `;
 }
+// Add blink-month keyframe via JS (CSS not yet in stylesheet)
+const blinkStyle=document.createElement('style');
+blinkStyle.textContent='@keyframes blink-month{0%,100%{box-shadow:0 0 0 rgba(230,81,0,0)}50%{box-shadow:0 0 24px 8px rgba(230,81,0,.8);transform:scale(1.08)}}';
+document.head.appendChild(blinkStyle);
 
 /* ══════════════════════════════════════════
    ON ENTER — all animations triggered per slide
@@ -1603,6 +1668,7 @@ function buildTodaySlide(){
 function stopAllLoops(){
   clearTimeout(nameLoop);clearTimeout(dobLoopTimer);clearTimeout(s7LoopTimer);
   clearTimeout(s8LoopTimer);clearTimeout(c3LoopTimer);clearTimeout(s10LoopTimer);clearTimeout(s11LoopTimer);
+  stopAlgo();
 }
 
 function onEnter(id){
@@ -1637,15 +1703,13 @@ function onEnter(id){
       break;
     case 's4b':
       document.getElementById('s4b-wrap').classList.add('s4-sub-active');
-      resetFlags('country-flags');
-      animateDigitCols('country-dcols',['2','0','0']).then(()=>animateFlags('country-flags',5));
-      setInterval(()=>{resetFlags('country-flags');animateDigitCols('country-dcols',['2','0','0']).then(()=>animateFlags('country-flags',5));},6000);
+      animateDigitCols('country-dcols',['2','0','0']);
+      setInterval(()=>animateDigitCols('country-dcols',['2','0','0']),6000);
       break;
     case 's4c':
       document.getElementById('s4c-wrap').classList.add('s4-sub-active');
-      resetFlags('lang-flags');
-      animateDigitCols('lang-dcols',['4','3','4']).then(()=>animateFlags('lang-flags',4));
-      setInterval(()=>{resetFlags('lang-flags');animateDigitCols('lang-dcols',['4','3','4']).then(()=>animateFlags('lang-flags',4));},6000);
+      animateDigitCols('lang-dcols',['4','3','4']);
+      setInterval(()=>animateDigitCols('lang-dcols',['4','3','4']),6000);
       break;
     case 's6':setTimeout(animateDobLoop,400);break;
     case 's7':setTimeout(animateS7,300);break;
@@ -1653,6 +1717,26 @@ function onEnter(id){
     case 's9':resetS9();break;
     case 's10':setTimeout(animateSig,300);break;
     case 's11':setTimeout(animateFasc,300);break;
+    case 's15':
+      // Show card + demo
+      const s15card=document.getElementById('s15-card');
+      const s15demo=document.getElementById('decalage-demo');
+      if(s15card){s15card.style.opacity='0';s15card.style.transform='translateY(20px)';
+        setTimeout(()=>{s15card.style.opacity='1';s15card.style.transform='translateY(0)';},400);}
+      if(s15demo){s15demo.style.opacity='0';setTimeout(()=>s15demo.style.opacity='1',1000);}
+      // Animate matching numbers
+      let qn=40;
+      const numAnim=setInterval(()=>{
+        qn++;if(qn>50)qn=40;
+        const qEl=document.getElementById('q-num');const rEl=document.getElementById('r-num');
+        if(qEl)qEl.textContent=qn;if(rEl)rEl.textContent=qn;
+        const arr=document.getElementById('check-arrow');
+        if(arr){arr.textContent='✅';arr.style.color='#4ade80';
+          setTimeout(()=>{if(arr){arr.textContent='↔';arr.style.color='var(--or)';}},600);}
+      },1800);
+      // Clean up when leaving
+      setTimeout(()=>clearInterval(numAnim),60000);
+      break;
   }
 }
 
