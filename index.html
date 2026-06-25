@@ -478,38 +478,121 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
 }
 
 /* ═══════════════════════════════════════════
-   SLIDE 10 — SIGNATURE & DATE
+   SLIDE 10 — SIGNATURE & DATE (redesign)
 ═══════════════════════════════════════════ */
-#s10 .card{padding:20px 28px;width:92%;max-width:950px;text-align:center}
-.sig-hdr{font-size:clamp(11px,1.4vw,15px);color:#333;text-align:left;margin-bottom:10px;line-height:1.6}
-.sig-hdr-title{font-weight:900;font-size:clamp(13px,1.7vw,18px)}
-.sig-yellow-box{background:#FFFF44;padding:2px 8px;font-size:clamp(12px,1.5vw,16px);display:inline-block}
-.sig-line{border-bottom:1.5px solid #333;min-height:36px;padding-bottom:2px;
-  display:flex;align-items:flex-end;margin-bottom:8px;gap:4px}
+#s10{justify-content:center;padding-top:56px}
+.s10-layout{
+  display:flex;gap:clamp(20px,3vw,50px);
+  width:94%;max-width:1100px;
+  align-items:flex-start;
+}
+
+/* LEFT: signature form */
+.s10-left{
+  flex:1.1;background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;padding:22px 26px;
+  backdrop-filter:blur(4px);
+}
+.s10-section-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--or);border-radius:8px;
+  padding:6px 14px;margin-bottom:16px;
+}
+.s10-section-badge .num{font-size:clamp(18px,2.5vw,28px);font-weight:900;color:#fff}
+.s10-section-badge .lbl{font-size:clamp(11px,1.4vw,16px);font-weight:700;color:#fff;letter-spacing:1px}
+.s10-instructions{
+  font-size:clamp(11px,1.3vw,14px);color:rgba(255,255,255,.55);
+  line-height:1.6;margin-bottom:14px;
+}
+.s10-agree-highlight{
+  background:rgba(255,255,0,.15);border:1px solid rgba(255,255,0,.3);
+  border-radius:6px;padding:4px 10px;
+  font-size:clamp(11px,1.3vw,14px);color:#ffd54f;
+  display:inline-block;margin-bottom:16px;
+}
+
+/* Writing lines */
+.sig-field{margin-bottom:16px}
+.sig-field-label{
+  font-size:clamp(9px,1vw,12px);font-weight:700;letter-spacing:2px;
+  color:rgba(255,255,255,.35);text-transform:uppercase;margin-bottom:5px;
+}
+.sig-write-line{
+  border-bottom:1.5px solid rgba(255,255,255,.25);
+  min-height:clamp(34px,4vw,48px);padding-bottom:3px;
+  display:flex;align-items:flex-end;gap:6px;
+  position:relative;
+}
+.sig-write-line::before{
+  content:'';position:absolute;left:0;bottom:0;
+  height:1.5px;width:0%;background:var(--or);
+  transition:width 0.5s ease;
+}
+.sig-write-line.writing::before{width:100%}
 .sig-cursive{
   font-family:'Comic Sans MS','Segoe Script',cursive;
-  font-size:clamp(14px,2vw,24px);color:#111;
+  font-size:clamp(15px,2.2vw,28px);color:#fff;
   overflow:hidden;max-width:0;white-space:nowrap;display:inline-block;
 }
-.sig-bottom-row{display:flex;gap:20px;border-top:1px solid #ccc;padding-top:8px;margin-top:4px}
-.sig-bl{font-size:clamp(11px,1.4vw,15px);font-weight:700;white-space:nowrap}
-.sig-bline{flex:1;border-bottom:1px solid #333;height:24px}
+.sig-fields-bottom{
+  display:flex;gap:20px;padding-top:12px;
+  border-top:1px solid rgba(255,255,255,.1);
+  margin-top:4px;
+}
+.sig-bottom-field{flex:1}
+.sig-bottom-label{font-size:clamp(9px,1vw,12px);font-weight:700;letter-spacing:2px;
+  color:rgba(255,255,255,.35);text-transform:uppercase;margin-bottom:4px}
+.sig-bottom-line{border-bottom:1px solid rgba(255,255,255,.2);height:26px}
 
-/* Date animation */
-.date-anim{
-  margin-top:18px;display:flex;flex-direction:column;align-items:center;gap:12px;
+/* RIGHT: date explanation */
+.s10-right{
+  flex:1;display:flex;flex-direction:column;gap:16px;
+}
+.s10-date-card{
+  background:rgba(232,119,34,.1);border:1.5px solid rgba(232,119,34,.4);
+  border-radius:14px;padding:20px 24px;
   opacity:0;transition:opacity .5s ease;
 }
-.date-anim.show{opacity:1}
-.date-anim-lbl{font-size:clamp(13px,1.8vw,20px);color:#555;font-weight:300;display:flex;align-items:center;gap:10px}
-.warn-icon{font-size:clamp(22px,3vw,36px)}
-.date-transform-wrap{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center}
-.date-from{display:flex;align-items:center;gap:6px}
-.date-arr{font-size:clamp(20px,3vw,36px);color:var(--or);font-weight:900;animation:pulse-or 1.5s ease-in-out infinite}
-.date-to{font-size:clamp(18px,2.5vw,32px);font-weight:900;color:var(--navy);
-  background:#EEF4FF;padding:6px 14px;border-radius:8px;border:2px solid var(--navy);
-  opacity:0;transition:opacity .4s ease}
-.date-to.show{opacity:1}
+.s10-date-card.show{opacity:1}
+.s10-date-title{
+  font-size:clamp(14px,1.8vw,20px);color:var(--or);font-weight:700;
+  display:flex;align-items:center;gap:8px;margin-bottom:16px;
+}
+.date-transform-row{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;
+}
+.dt-block{display:flex;flex-direction:column;align-items:center;gap:5px}
+.dt-val{
+  font-size:clamp(18px,2.5vw,32px);font-weight:900;
+  padding:8px 14px;border-radius:8px;min-width:48px;text-align:center;
+}
+.dt-val.day{background:rgba(230,81,0,.2);color:#ffab40;border:1px solid rgba(230,81,0,.4)}
+.dt-val.month-fr{background:rgba(29,122,79,.2);color:#69f0ae;border:1px solid rgba(29,122,79,.4);
+  animation:blink-month 1.4s ease-in-out infinite}
+.dt-val.year{background:rgba(13,71,161,.3);color:#82b1ff;border:1px solid rgba(13,71,161,.5)}
+.dt-val.month-us{background:rgba(230,81,0,.2);color:#ffab40;border:1px solid rgba(230,81,0,.4);
+  animation:blink-month 1.4s ease-in-out infinite}
+.dt-lbl{font-size:clamp(9px,1vw,11px);color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px}
+.dt-sep{font-size:clamp(20px,2.8vw,34px);color:rgba(255,255,255,.3);font-weight:300;align-self:center}
+.dt-arrow{font-size:clamp(22px,3vw,38px);color:var(--or);font-weight:900;
+  animation:pulse-or 1.5s ease-in-out infinite;align-self:center;margin:0 6px}
+.dt-result{
+  font-size:clamp(22px,3.2vw,42px);font-weight:900;color:#fff;
+  letter-spacing:2px;text-align:center;padding:10px 18px;
+  background:rgba(255,255,255,.08);border-radius:10px;border:1px solid rgba(255,255,255,.15);
+  opacity:0;transition:opacity .4s ease;
+}
+.dt-result.show{opacity:1}
+
+/* Also used by s10-right algo display */
+.s10-algo-card{
+  background:rgba(0,0,0,.3);border:1px solid rgba(74,222,128,.2);
+  border-radius:12px;padding:14px 18px;
+  font-family:monospace;font-size:clamp(11px,1.3vw,15px);
+  color:#4ade80;line-height:2;letter-spacing:.5px;
+  min-height:120px;
+}
 
 /* ═══════════════════════════════════════════
    SLIDE 11 — FASCICULE + CIRCLES
@@ -930,32 +1013,89 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
 <!-- ══ S10: SIGNATURE & DATE ══════════════════════════ -->
 <div class="slide" id="s10">
   <div class="slide-header"><span class="slide-brand"><strong>Polytech Lille</strong> — TOEIC Officiel</span></div>
-  <div class="card" style="padding:20px 28px;width:92%;max-width:950px">
-    <div class="card-orange-top"></div>
-    <div class="sig-hdr">
-      <span class="sig-hdr-title">13 — SIGNATURE AND DATE: </span>
-      Please copy the statement below (do not print) and sign as you would an official document.<br>
-      I hereby agree to the conditions set forth at www.ets.org/toeic and certify that I am the person whose name appears on this answer sheet.
-      <br><span class="sig-yellow-box">I hereby agree…</span>
-    </div>
-    <div style="padding:8px 0">
-      <div class="sig-line"><span class="sig-cursive" id="sig-a"></span><span class="p-cursor" id="pc-siga">✏️</span></div>
-      <div class="sig-line" style="margin-top:6px"><span class="sig-cursive" id="sig-s"></span><span class="p-cursor" id="pc-sigs">✏️</span></div>
-    </div>
-    <div class="sig-bottom-row">
-      <span class="sig-bl">Signature:</span><div class="sig-bline"></div>
-      <span class="sig-bl" style="margin-left:24px">Date:</span><div class="sig-bline" style="max-width:200px"></div>
-    </div>
-    <div class="date-anim" id="date-anim-wrap">
-      <div class="date-anim-lbl"><span class="warn-icon">⚠️</span> Format américain :</div>
-      <div class="date-transform-wrap">
-        <div class="date-from">
-          <span class="date-tok tok-day">23</span>
-          <span style="color:#888;font-size:clamp(14px,2vw,22px)">octobre 2025</span>
-        </div>
-        <div class="date-arr">→</div>
-        <div class="date-to" id="date-to-val">10/23/2025</div>
+  <div class="s10-layout">
+
+    <!-- LEFT: signature form on dark glass -->
+    <div class="s10-left">
+      <div class="s10-section-badge">
+        <span class="num">13</span>
+        <span class="lbl">SIGNATURE &amp; DATE</span>
       </div>
+      <div class="s10-instructions">
+        Please copy the statement below (do not print) and sign as you would on an official document.<br>
+        I hereby agree to the conditions set forth at www.ets.org/toeic…
+      </div>
+      <span class="s10-agree-highlight">✏️ I hereby agree…</span>
+
+      <div class="sig-field">
+        <div class="sig-field-label">Statement</div>
+        <div class="sig-write-line" id="swl-a">
+          <span class="sig-cursive" id="sig-a"></span>
+          <span class="p-cursor" id="pc-siga">✏️</span>
+        </div>
+      </div>
+
+      <div class="sig-field">
+        <div class="sig-field-label">Signature</div>
+        <div class="sig-write-line" id="swl-s">
+          <span class="sig-cursive" id="sig-s"></span>
+          <span class="p-cursor" id="pc-sigs">✏️</span>
+        </div>
+      </div>
+
+      <div class="sig-fields-bottom">
+        <div class="sig-bottom-field">
+          <div class="sig-bottom-label">Signature</div>
+          <div class="sig-bottom-line"></div>
+        </div>
+        <div class="sig-bottom-field" style="max-width:180px">
+          <div class="sig-bottom-label">Date</div>
+          <div class="sig-bottom-line"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: date format explanation -->
+    <div class="s10-right">
+
+      <div class="s10-date-card" id="date-anim-wrap">
+        <div class="s10-date-title">⚠️ Format américain obligatoire</div>
+
+        <!-- French date (example) -->
+        <div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-bottom:10px;font-size:clamp(13px,1.7vw,20px);color:rgba(255,255,255,.5)">
+          <span class="dt-val day">23</span>
+          <span class="dt-val month-fr">octobre</span>
+          <span class="dt-val year">2025</span>
+        </div>
+
+        <div class="dt-arrow" style="text-align:center">↓</div>
+
+        <!-- US result -->
+        <div class="date-transform-row" style="margin-top:10px">
+          <div class="dt-block">
+            <div class="dt-val month-us">10</div>
+            <div class="dt-lbl">mois ← ici !</div>
+          </div>
+          <div class="dt-sep">/</div>
+          <div class="dt-block">
+            <div class="dt-val day">23</div>
+            <div class="dt-lbl">jour</div>
+          </div>
+          <div class="dt-sep">/</div>
+          <div class="dt-block">
+            <div class="dt-val year">2025</div>
+            <div class="dt-lbl">année</div>
+          </div>
+        </div>
+
+        <div class="dt-result" id="date-to-val" style="margin-top:14px">10/23/2025</div>
+      </div>
+
+      <!-- Algo display for ETC stats -->
+      <div class="s10-algo-card" id="algo-display-s10">
+        <div style="color:rgba(74,222,128,.4);font-size:.85em;margin-bottom:6px">// ETS stats only</div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -1426,8 +1566,10 @@ const ALGO_LINES=[
   '0010 1111 0101 1000',
   'norm.dist(μ, σ²)',
 ];
-function startAlgo(){
-  const el=document.getElementById('algo-display');
+function startAlgo(){startAlgoEl('algo-display');}
+function startAlgoEl(elId){
+  stopAlgo();
+  const el=document.getElementById(elId);
   if(!el)return;
   let li=0;
   algoInterval=setInterval(()=>{
@@ -1563,20 +1705,36 @@ async function animateSig(){
   clearTimeout(s10LoopTimer);
   ['sig-a','sig-s'].forEach(id=>{const el=document.getElementById(id);if(el){el.textContent='';el.style.maxWidth='0px';}});
   ['pc-siga','pc-sigs'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='none';});
+  ['swl-a','swl-s'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('writing');});
   const dtWrap=document.getElementById('date-anim-wrap');if(dtWrap)dtWrap.classList.remove('show');
   const dtTo=document.getElementById('date-to-val');if(dtTo)dtTo.classList.remove('show');
 
-  await delay(400);
-  await typeIn(document.getElementById('sig-a'),document.getElementById('pc-siga'),'I hereby agree to the conditions set forth at ets.org/toeic',38);
-  await delay(400);
-  // Buzz Lightyear signature
-  await typeIn(document.getElementById('sig-s'),document.getElementById('pc-sigs'),'𝓑𝓾𝔃𝔃 𝓛𝓲𝓰𝓱𝓽𝔂𝓮𝓪𝓻  ~∞~✦',90);
+  await delay(500);
+
+  // Highlight statement line
+  const swlA=document.getElementById('swl-a');if(swlA)swlA.classList.add('writing');
+  await typeIn(document.getElementById('sig-a'),document.getElementById('pc-siga'),
+    'I hereby agree to the conditions set forth at ets.org/toeic',38);
+  if(swlA)swlA.classList.remove('writing');
+
+  await delay(500);
+
+  // Signature line — Buzz Lightyear
+  const swlS=document.getElementById('swl-s');if(swlS)swlS.classList.add('writing');
+  await typeIn(document.getElementById('sig-s'),document.getElementById('pc-sigs'),
+    '𝓑𝓾𝔃𝔃 𝓛𝓲𝓰𝓱𝓽𝔂𝓮𝓪𝓻  ~∞~✦',90);
+  if(swlS)swlS.classList.remove('writing');
+
+  // Show date card
   await delay(600);
   if(dtWrap)dtWrap.classList.add('show');
-  await delay(800);
+  await delay(900);
   if(dtTo)dtTo.classList.add('show');
 
-  s10LoopTimer=setTimeout(animateSig,7000);
+  // Start algo on the right
+  startAlgoEl('algo-display-s10');
+
+  s10LoopTimer=setTimeout(animateSig,8000);
 }
 
 /* ══════════════════════════════════════════
