@@ -193,22 +193,25 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
 }
 .bub.filled{background:#111!important;border-color:#000!important;color:transparent!important}
 
-/* Arrow */
+/* Arrow — floats NEXT TO the target bubble (right side, pointing left) */
 #name-arrow{
-  position:absolute;top:-54px;left:0;
+  position:absolute;
   pointer-events:none;z-index:60;
-  opacity:0;transition:left .2s ease,opacity .3s;
-  display:flex;flex-direction:column;align-items:center;
+  opacity:0;
+  transition:left .25s ease, top .25s ease, opacity .35s;
+  display:flex;align-items:center;gap:3px;
 }
-.arr-label{background:var(--red);color:#fff;font-size:clamp(10px,1.3vw,15px);
-  font-weight:700;padding:3px 8px;border-radius:4px;white-space:nowrap}
+.arr-label{background:var(--red);color:#fff;font-size:clamp(11px,1.4vw,16px);
+  font-weight:700;padding:3px 10px;border-radius:4px;white-space:nowrap;
+  box-shadow:0 2px 8px rgba(0,0,0,.3)}
 .arr-tri{
   width:0;height:0;
-  border-left:10px solid transparent;border-right:10px solid transparent;
-  border-top:14px solid var(--red);margin-top:-1px;
-  animation:bounce-down .55s ease-in-out infinite;
+  border-top:10px solid transparent;border-bottom:10px solid transparent;
+  border-right:16px solid var(--red);
+  animation:bounce-left .65s ease-in-out infinite;
+  flex-shrink:0;
 }
-@keyframes bounce-down{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+@keyframes bounce-left{0%,100%{transform:translateX(0)}50%{transform:translateX(-8px)}}
 
 /* Section divider in grid */
 .grid-sep{width:12px;flex-shrink:0;display:flex;flex-direction:column;
@@ -1076,7 +1079,7 @@ document.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-tx;
 ══════════════════════════════════════════ */
 function delay(ms){return new Promise(r=>setTimeout(r,ms))}
 
-async function typeIn(textEl,cursorEl,text,speed=75){
+async function typeIn(textEl,cursorEl,text,speed=95){
   textEl.textContent='';textEl.style.maxWidth='0px';
   if(cursorEl)cursorEl.style.display='inline-block';
   await delay(200);
@@ -1106,44 +1109,65 @@ function buildNameGrid(){
   const wrap=document.getElementById('name-grid-wrap');
   wrap.innerHTML='';
 
-  // Section labels row
-  const lblRow=document.createElement('div');
-  lblRow.className='letter-row';
-  for(let c=0;c<TCOLS;c++){
-    if(c===LCOLS){const s=makeBox(null,'lbox sep');s.style.width='12px';lblRow.appendChild(s);continue}
-    const l=makeBox(null,'lbox section-label');
-    if(c===0)l.textContent='↓ Last Name';
-    if(c===LCOLS+1)l.textContent='↓ First Name';
-    l.style.cssText='width:clamp(24px,2.8vw,36px);font-size:clamp(7px,.9vw,10px);color:#E87722;font-weight:700;background:transparent;border:none;height:auto;padding:1px 0';
-    lblRow.appendChild(l);
-  }
-  wrap.appendChild(lblRow);
+  // ── Build two sections: LAST (20 cols) + gap + FIRST (18 cols)
+  // Each section has: label row, input row, bubble grid
+  // We use a flex row containing two section blocks so alignment is exact
 
-  // Input row
-  const inpRow=document.createElement('div');inpRow.className='letter-row';
-  for(let c=0;c<TCOLS;c++){
-    if(c===LCOLS){const s=makeBox(null,'lbox sep');inpRow.appendChild(s);continue}
-    inpRow.appendChild(makeBox(`lb-${c}`));
-  }
-  wrap.appendChild(inpRow);
+  // Outer container: two blocks side by side
+  const outer=document.createElement('div');
+  outer.style.cssText='display:flex;gap:14px;align-items:flex-start;position:relative';
+  outer.id='name-outer';
 
-  // Bubble grid
-  const bwrap=document.createElement('div');bwrap.className='bwrap';bwrap.style.position='relative';bwrap.id='bwrap';
-  for(let c=0;c<TCOLS;c++){
-    if(c===LCOLS){
-      const s=document.createElement('div');s.style.cssText='width:12px;flex-shrink:0';bwrap.appendChild(s);continue;
+  const sections=[
+    {name:LAST, cols:LCOLS, off:0,      labelText:'↓ Nom de famille'},
+    {name:FIRST,cols:FCOLS, off:LCOLS+1,labelText:'↓ Prénom'},
+  ];
+
+  sections.forEach(sec=>{
+    const block=document.createElement('div');
+    block.style.cssText='display:flex;flex-direction:column;gap:4px';
+
+    // Label row
+    const lblRow=document.createElement('div');
+    lblRow.style.cssText='display:flex;gap:3px;margin-bottom:2px';
+    for(let ci=0;ci<sec.cols;ci++){
+      const l=document.createElement('div');
+      l.style.cssText=`width:clamp(24px,2.8vw,36px);font-size:clamp(7px,.9vw,10px);color:#E87722;font-weight:700;flex-shrink:0;${ci===0?'':''}`;
+      if(ci===0) l.textContent=sec.labelText;
+      lblRow.appendChild(l);
     }
-    const col=document.createElement('div');col.className='bcol';col.id=`bcol-${c}`;
-    ALL_L.forEach(l=>col.appendChild(makeBub(l,`bb-${c}-${l}`)));
-    bwrap.appendChild(col);
-  }
-  wrap.appendChild(bwrap);
+    block.appendChild(lblRow);
 
-  // Arrow
-  const arr=document.createElement('div');arr.id='name-arrow';
-  arr.innerHTML='<div class="arr-label">ici</div><div class="arr-tri"></div>';
-  arr.style.cssText='position:absolute;top:2px;left:0;opacity:0;transition:left .22s ease,opacity .3s;pointer-events:none;z-index:60;display:flex;flex-direction:column;align-items:center;';
-  bwrap.appendChild(arr);
+    // Input boxes row
+    const inpRow=document.createElement('div');
+    inpRow.style.cssText='display:flex;gap:3px';
+    for(let ci=0;ci<sec.cols;ci++){
+      inpRow.appendChild(makeBox(`lb-${sec.off+ci}`));
+    }
+    block.appendChild(inpRow);
+
+    // Bubble grid — one col per character slot
+    const bwrapSec=document.createElement('div');
+    bwrapSec.style.cssText='display:flex;gap:3px;position:relative';
+    bwrapSec.id=`bwrap-${sec.off}`; // id based on offset
+    for(let ci=0;ci<sec.cols;ci++){
+      const col=document.createElement('div');
+      col.className='bcol';col.id=`bcol-${sec.off+ci}`;
+      ALL_L.forEach(l=>col.appendChild(makeBub(l,`bb-${sec.off+ci}-${l}`)));
+      bwrapSec.appendChild(col);
+    }
+    block.appendChild(bwrapSec);
+    outer.appendChild(block);
+  });
+
+  // Arrow — appended to outer container, positioned absolutely over it
+  const arr=document.createElement('div');
+  arr.id='name-arrow';
+  arr.innerHTML='<div class="arr-tri"></div><div class="arr-label">→</div>';
+  arr.style.cssText='position:absolute;top:0;left:0;opacity:0;pointer-events:none;z-index:60;';
+  outer.appendChild(arr);
+
+  wrap.appendChild(outer);
 }
 
 let nameLoop=null;
@@ -1155,26 +1179,45 @@ async function animateName(){
   if(!arrow)return;
   arrow.style.opacity='1';
 
+  const outer=document.getElementById('name-outer');
+  if(!outer)return;
+  const outerR=outer.getBoundingClientRect();
+
   const sections=[{name:LAST,off:0},{name:FIRST,off:LCOLS+1}];
   for(const sec of sections){
     for(let i=0;i<sec.name.length;i++){
-      const c=sec.off+i,letter=sec.name[i];
-      const col=document.getElementById(`bcol-${c}`);
-      if(col){
-        const bwrap=document.getElementById('bwrap');
-        const colR=col.getBoundingClientRect(),wrapR=bwrap.getBoundingClientRect();
-        arrow.style.left=(colR.left-wrapR.left+colR.width/2-18)+'px';
+      const c=sec.off+i;
+      const letter=sec.name[i];
+      const letterIdx=ALL_L.indexOf(letter); // 0-based row index in bubble column
+
+      // Get exact position of THIS bubble
+      const bub=document.getElementById(`bb-${c}-${letter}`);
+      if(bub){
+        const bubR=bub.getBoundingClientRect();
+        // Arrow sits to the RIGHT of the bubble, pointing left (←)
+        const arrowLeft=bubR.right-outerR.left+4;
+        const arrowTop=bubR.top-outerR.top+(bubR.height/2)-10;
+        arrow.style.left=arrowLeft+'px';
+        arrow.style.top=arrowTop+'px';
       }
-      await delay(420);
-      const lb=document.getElementById(`lb-${c}`);if(lb)lb.textContent=letter;
-      await delay(180);
-      const bub=document.getElementById(`bb-${c}-${letter}`);if(bub)bub.classList.add('filled');
-      await delay(150);
+
+      await delay(600); // slower
+
+      // Fill the letter box
+      const lb=document.getElementById(`lb-${c}`);
+      if(lb) lb.textContent=letter;
+
+      await delay(300);
+
+      // Fill bubble
+      if(bub) bub.classList.add('filled');
+
+      await delay(350);
     }
-    await delay(500);
+    await delay(700);
   }
   arrow.style.opacity='0';
-  nameLoop=setTimeout(animateName,2000);
+  nameLoop=setTimeout(animateName,2800);
 }
 
 /* ══════════════════════════════════════════
@@ -1195,10 +1238,10 @@ async function animateDigitCols(containerId,digits){
     for(let n=0;n<=9;n++){const b=document.getElementById(`db-${containerId}-${ci}-${n}`);if(b)b.classList.remove('filled');}
   });
   for(let ci=0;ci<digits.length;ci++){
-    await delay(600);
+    await delay(800);
     const dv=digits[ci];
     const inp=document.getElementById(`di-${containerId}-${ci}`);if(inp)inp.textContent=dv;
-    await delay(200);
+    await delay(350);
     const bub=document.getElementById(`db-${containerId}-${ci}-${parseInt(dv)}`);if(bub)bub.classList.add('filled');
   }
 }
@@ -1280,16 +1323,16 @@ async function animateDobLoop(){
   const groups=[{bPfx:'mm',digs:DOB.mm.split('')},{bPfx:'dd',digs:DOB.dd.split('')},{bPfx:'yyyy',digs:DOB.yyyy.split('')}];
   for(const g of groups){
     for(let ci=0;ci<g.digs.length;ci++){
-      await delay(380);
+      await delay(550);
       const dv=g.digs[ci];
       const inp=document.getElementById(`dob-in-${g.bPfx}-${ci}`);if(inp)inp.textContent=dv;
-      await delay(140);
+      await delay(220);
       const bub=document.getElementById(`dob-b-${g.bPfx}-${ci}-${parseInt(dv)}`);if(bub)bub.classList.add('filled');
     }
-    await delay(200);
+    await delay(300);
   }
 
-  dobLoopTimer=setTimeout(animateDobLoop,3000);
+  dobLoopTimer=setTimeout(animateDobLoop,4500);
 }
 
 /* ══════════════════════════════════════════
@@ -1325,7 +1368,7 @@ async function animateS7(){
   await delay(300);
   await typeIn(document.getElementById('ft-city2'),document.getElementById('pc-city2'),"Villeneuve d'Ascq",70);
 
-  s7LoopTimer=setTimeout(animateS7,3500);
+  s7LoopTimer=setTimeout(animateS7,5000);
 }
 
 /* ══════════════════════════════════════════
@@ -1360,7 +1403,7 @@ async function animateS8(){
     setTimeout(()=>b.style.height=heights[i]+'px',i*150);
   });
 
-  s8LoopTimer=setTimeout(animateS8,4000);
+  s8LoopTimer=setTimeout(animateS8,6000);
 }
 
 /* ══════════════════════════════════════════
@@ -1382,10 +1425,10 @@ async function animateCustom(digId,bubId,digits){
     for(let n=0;n<=9;n++){const b=document.getElementById(`${bubId}-${ci}-${n}`);if(b)b.classList.remove('filled');}
   }
   for(let ci=0;ci<digits.length;ci++){
-    await delay(600);
+    await delay(800);
     const dv=digits[ci];
     const dEl=document.getElementById(`${digId}-${ci}`);if(dEl)dEl.textContent=dv;
-    await delay(180);
+    await delay(300);
     const bub=document.getElementById(`${bubId}-${ci}-${parseInt(dv)}`);if(bub)bub.classList.add('filled');
   }
 }
@@ -1462,8 +1505,8 @@ async function animateC3Loop(){
   c3LoopTimer=setTimeout(async()=>{
     for(let ci=0;ci<3;ci++){const d=document.getElementById(`c3-digs-${ci}`);if(d)d.textContent='';for(let n=0;n<=9;n++){const b=document.getElementById(`c3-bubs-${ci}-${n}`);if(b)b.classList.remove('filled');}}
     await animateCustom('c3-digs','c3-bubs',['0','0','5']);
-    c3LoopTimer=setTimeout(animateC3Loop,2500);
-  },2500);
+    c3LoopTimer=setTimeout(animateC3Loop,3500);
+  },3500);
 }
 
 /* ══════════════════════════════════════════
@@ -1486,7 +1529,7 @@ async function animateSig(){
   await delay(700);
   if(dtTo)dtTo.classList.add('show');
 
-  s10LoopTimer=setTimeout(animateSig,5000);
+  s10LoopTimer=setTimeout(animateSig,7000);
 }
 
 /* ══════════════════════════════════════════
@@ -1522,7 +1565,7 @@ async function animateFasc(){
   for(const l of ['A','B','C','D']){
     const c=document.getElementById(`fc-${l}`);if(c)c.classList.add('filling');await delay(950);
   }
-  s11LoopTimer=setTimeout(animateFasc,5000);
+  s11LoopTimer=setTimeout(animateFasc,7000);
 }
 
 /* ══════════════════════════════════════════
