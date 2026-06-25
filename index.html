@@ -1137,6 +1137,28 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
       </div>
     </div>
 
+    <!-- Format date américain — en dessous du formulaire -->
+    <div class="s10-date-wrap show">
+      <div class="s10-date-lbl">⚠️ Format américain :</div>
+      <div class="s10-tokens">
+        <div class="s10-tok t-day" id="s10-tok-day">23</div>
+        <div class="s10-tok t-month" id="s10-tok-month">oct.</div>
+        <div class="s10-tok t-year" id="s10-tok-year">2025</div>
+      </div>
+      <div class="s10-arrow">→</div>
+      <div class="s10-tokens">
+        <div class="s10-tok t-month" style="position:relative" id="s10-us-month">10
+          <span style="position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);
+            font-size:clamp(8px,.9vw,11px);color:var(--or);white-space:nowrap;font-weight:700">mois !</span>
+        </div>
+        <div class="s10-tok t-sep">/</div>
+        <div class="s10-tok t-day" id="s10-us-day">23</div>
+        <div class="s10-tok t-sep">/</div>
+        <div class="s10-tok t-year" id="s10-us-year">2025</div>
+      </div>
+      <div class="s10-result show" id="s10-date-result">= 10/23/2025</div>
+    </div>
+
   </div>
 </div>
 
@@ -1966,12 +1988,18 @@ function buildTodaySlide(){
   setAll('s12-tok-year', String(yrFr));
   setAll('s12-us-day', dayUS);
   setAll('s12-us-year', String(yrUS));
-  // Month US token has a child <span> for "mois!" label — update firstChild
-  const mUsEl=document.getElementById('s12-us-month');
-  if(mUsEl) mUsEl.firstChild.textContent=monUS;
-  // Result
-  const resEl=document.getElementById('date-to-val');
-  if(resEl) resEl.textContent=`= ${usDate}`;
+  // Populate S10 date tokens too
+  const setEl=(id,v)=>{const el=document.getElementById(id);if(el)el.childNodes[0].textContent=v;};
+  const setElFull=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+  setElFull('s10-tok-day', dayUS);
+  setElFull('s10-tok-month', monFrShort);
+  setElFull('s10-tok-year', String(yrFr));
+  setElFull('s10-us-day', dayUS);
+  setElFull('s10-us-year', String(yrUS));
+  const m10=document.getElementById('s10-us-month');
+  if(m10) m10.firstChild.textContent=monUS;
+  const r10=document.getElementById('s10-date-result');
+  if(r10) r10.textContent=`= ${usDate}`;
 }
 // Add blink-month keyframe via JS (CSS not yet in stylesheet)
 const blinkStyle=document.createElement('style');
