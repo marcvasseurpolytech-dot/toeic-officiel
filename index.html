@@ -1225,34 +1225,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
   </div>
 </div>
 
-<!-- ══ S13: AVERTISSEMENT TRICHERIE ══════════════════ -->
-<div class="slide" id="s15">
-  <div class="slide-header"><span class="slide-brand"><strong>Polytech Lille</strong> — TOEIC Officiel</span></div>
-  <div class="content" style="display:flex;flex-direction:column;align-items:center;gap:24px;width:90%;max-width:900px">
-    <div style="font-size:clamp(60px,11vw,120px);animation:warn-pulse 1.5s ease-in-out infinite">⚠️</div>
-    <div style="background:rgba(232,119,34,.15);border:3px solid var(--or);border-radius:14px;padding:28px 40px;text-align:center;
-      opacity:0;transform:translateY(20px);transition:all .7s ease .4s" id="s15-card">
-      <div style="font-size:clamp(18px,2.8vw,34px);font-weight:700;color:#fff;line-height:1.7;margin-bottom:14px">
-        Attention de ne pas <span style="color:var(--or)">décaler vos réponses</span> !
-      </div>
-      <div style="font-size:clamp(15px,2vw,24px);color:rgba(255,255,255,.85);line-height:1.9">
-        Vérifiez toujours le <strong style="color:#4ade80">numéro de la question</strong><br>
-        et celui de votre <strong style="color:#4ade80">réponse sur la feuille</strong>.
-      </div>
-    </div>
-    <!-- Animated number check visual -->
-    <div id="decalage-demo" style="display:flex;align-items:center;gap:20px;opacity:0;transition:opacity .5s ease 1s">
-      <div style="font-size:clamp(14px,1.8vw,20px);color:rgba(255,255,255,.7);text-align:center">
-        Question<br><span style="font-size:clamp(28px,4vw,52px);font-weight:900;color:#4ade80" id="q-num">47</span>
-      </div>
-      <div style="font-size:clamp(24px,4vw,50px);color:var(--or)" id="check-arrow">↔</div>
-      <div style="font-size:clamp(14px,1.8vw,20px);color:rgba(255,255,255,.7);text-align:center">
-        Réponse<br><span style="font-size:clamp(28px,4vw,52px);font-weight:900;color:#4ade80" id="r-num">47</span>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- ══ S14: TEST AUDIO ════════════════════════════════ -->
 <div class="slide" id="s14">
   <div class="slide-header"><span class="slide-brand"><strong>Polytech Lille</strong> — TOEIC Officiel</span></div>
@@ -1292,7 +1264,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
 /* ══════════════════════════════════════════
    SLIDE ENGINE
 ══════════════════════════════════════════ */
-const SLIDES=['s1','s2','s3','s4a','s4b','s4c','s5','s6','s7','s8','s9','s10','s11','s12','s15','s14','s16'];
+const SLIDES=['s1','s2','s3','s4a','s4b','s4c','s5','s6','s7','s8','s9','s10','s11','s12','s14','s16'];
 const TOTAL=SLIDES.length;
 let cur=0;
 const ctrEl=document.getElementById('ctr');
