@@ -586,13 +586,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
 .dt-result.show{opacity:1}
 
 /* Also used by s10-right algo display */
-.s10-algo-card{
-  background:rgba(0,0,0,.3);border:1px solid rgba(74,222,128,.2);
-  border-radius:12px;padding:14px 18px;
-  font-family:monospace;font-size:clamp(11px,1.3vw,15px);
-  color:#4ade80;line-height:2;letter-spacing:.5px;
-  min-height:120px;
-}
 
 /* ═══════════════════════════════════════════
    SLIDE 11 — FASCICULE + CIRCLES
@@ -1090,11 +1083,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
         </div>
 
         <div class="dt-result" id="date-to-val" style="margin-top:14px">10/23/2025</div>
-      </div>
-
-      <!-- Algo display for ETC stats -->
-      <div class="s10-algo-card" id="algo-display-s10">
-        <div style="color:rgba(74,222,128,.4);font-size:.85em;margin-bottom:6px">// ETS stats only</div>
       </div>
 
     </div>
@@ -1731,9 +1719,6 @@ async function animateSig(){
   if(dtWrap)dtWrap.classList.add('show');
   await delay(900);
   if(dtTo)dtTo.classList.add('show');
-
-  // Start algo on the right
-  startAlgoEl('algo-display-s10');
 
   s10LoopTimer=setTimeout(animateSig,8000);
 }
