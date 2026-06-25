@@ -1137,24 +1137,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
       </div>
     </div>
 
-    <!-- Test audio — en dessous de la signature -->
-    <div style="display:flex;align-items:center;gap:clamp(16px,2.5vw,36px);
-      background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
-      border-radius:12px;padding:14px 22px;backdrop-filter:blur(4px)">
-      <div class="ear-wrap" style="font-size:clamp(50px,8vw,90px);line-height:1">
-        👂<span class="fq">?</span><span class="fq">?</span><span class="fq">?</span>
-      </div>
-      <div>
-        <div style="font-size:clamp(16px,2.2vw,26px);font-weight:700;color:#fff;margin-bottom:4px">
-          Test Audio — Listening Section
-        </div>
-        <div style="font-size:clamp(12px,1.5vw,17px);color:rgba(255,255,255,.55);line-height:1.6">
-          Écoutez attentivement et répondez aux<br>
-          <strong style="color:var(--or)">100 questions</strong> de la partie Listening.
-        </div>
-      </div>
-    </div>
-
   </div>
 </div>
 
@@ -1249,6 +1231,15 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
   </div>
 </div>
 
+<!-- ══ S14: TEST AUDIO ════════════════════════════════ -->
+<div class="slide" id="s14">
+  <div class="slide-header"><span class="slide-brand"><strong>Polytech Lille</strong> — TOEIC Officiel</span></div>
+  <div class="content">
+    <div class="ear-wrap">👂<span class="fq">?</span><span class="fq">?</span><span class="fq">?</span></div>
+    <div class="audio-title">Test Audio — Listening Section</div>
+  </div>
+</div>
+
 <!-- ══ S16: READY ═════════════════════════════════════ -->
 <div class="slide" id="s16">
   <div class="slide-header"><span class="slide-brand"><strong>Polytech Lille</strong> — TOEIC Officiel</span></div>
@@ -1279,7 +1270,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
 /* ══════════════════════════════════════════
    SLIDE ENGINE
 ══════════════════════════════════════════ */
-const SLIDES=['s1','s2','s3','s4a','s4b','s4c','s5','s6','s7','s8','s9','s10','s11','s12','s15','s16'];
+const SLIDES=['s1','s2','s3','s4a','s4b','s4c','s5','s6','s7','s8','s9','s10','s11','s12','s15','s14','s16'];
 const TOTAL=SLIDES.length;
 let cur=0;
 const ctrEl=document.getElementById('ctr');
