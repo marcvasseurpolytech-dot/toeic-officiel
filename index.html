@@ -377,43 +377,101 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
 @keyframes pcblink{0%,100%{opacity:1}50%{opacity:.2}}
 
 /* ═══════════════════════════════════════════
-   SLIDE 8 — DATE OF BIRTH section (rebrand from 7)
-   (was: QUESTIONNAIRE RESPONSES)
-   → This is the NEW slide 7 = QR, slide 8 = DOB anim
-   Let me re-number:
-   s7 = fill sections 7&8 (pencil)
-   s8 = Questionnaire (QR cross + doigt)
+   SLIDE 8 — QUESTIONNAIRE RESPONSES (redesign)
 ═══════════════════════════════════════════ */
-#s8 .card{padding:14px 16px;display:flex;gap:28px;align-items:flex-start;max-width:950px;width:92%}
-.qr-section{flex-shrink:0}
-.qr-hdr{background:var(--gh);padding:6px 14px;border-radius:6px 6px 0 0;border-bottom:1px solid #bbb;text-align:center}
-.qr-hdr-num{font-size:clamp(13px,1.8vw,20px);font-weight:900}
-.qr-hdr-lbl{font-size:clamp(9px,1.2vw,13px);font-weight:700}
-.qr-grid{display:flex;flex-direction:column;gap:2px;padding:6px}
+#s8{justify-content:center;padding-top:56px}
+.s8-layout{
+  display:flex;gap:clamp(16px,2.5vw,40px);
+  width:94%;max-width:1100px;
+  align-items:flex-start;
+}
+
+/* LEFT — QR grid on white card */
+.s8-left{
+  background:#fff;border-radius:12px;
+  box-shadow:0 6px 30px rgba(0,0,0,.3);
+  overflow:hidden;flex-shrink:0;
+}
+.qr-hdr{background:var(--gh);padding:8px 16px;border-bottom:1px solid #bbb;text-align:center}
+.qr-hdr-num{font-size:clamp(14px,2vw,22px);font-weight:900}
+.qr-hdr-lbl{font-size:clamp(9px,1.1vw,13px);font-weight:700}
+.qr-xwrap{position:relative}
+.qr-grid{display:flex;flex-direction:column;gap:2px;padding:8px}
 .qr-row{display:flex;align-items:center;gap:3px}
 .qr-n{font-size:clamp(7px,1vw,11px);color:#555;min-width:18px;text-align:right;flex-shrink:0}
 .qbub{
   width:clamp(14px,1.8vw,20px);height:clamp(14px,1.8vw,20px);
-  border-radius:50%;border:1px solid #666;background:#fff;
+  border-radius:50%;border:1px solid #888;background:#fff;
   display:flex;align-items:center;justify-content:center;
   font-size:clamp(6px,.9vw,10px);color:#333;flex-shrink:0;
 }
-.qr-xwrap{position:relative}
-.qrx{position:absolute;background:var(--red);border-radius:3px;
-  opacity:0;transition:all .6s ease;z-index:10}
+/* SVG cross on grid — no .qrx red bars */
 
-.s8-right{flex:1;display:flex;flex-direction:column;align-items:center;
-  justify-content:center;gap:20px;padding:10px 0}
-.s8-note{font-size:clamp(16px,2.3vw,26px);color:#222;font-weight:300;text-align:center;line-height:1.8}
-.s8-note strong{color:var(--or);font-weight:900}
-/* Plastified doc icon */
-.plastif-icon{font-size:clamp(60px,9vw,120px);animation:plastif-float 2.5s ease-in-out infinite}
-@keyframes plastif-float{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
-/* Stats animation */
-.stats-bars{display:flex;align-items:flex-end;gap:8px;height:60px;margin-top:10px}
-.stat-bar{
-  width:clamp(20px,3vw,36px);background:var(--or);border-radius:4px 4px 0 0;
-  transition:height 1s ease;
+/* RIGHT — blackboard */
+.s8-right{
+  flex:1;display:flex;flex-direction:column;gap:14px;
+}
+.s8-note-pill{
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  border-radius:10px;padding:12px 18px;text-align:center;
+  font-size:clamp(14px,1.8vw,20px);color:#fff;font-weight:300;line-height:1.7;
+  backdrop-filter:blur(4px);
+}
+.s8-note-pill strong{color:var(--or);font-weight:700}
+
+/* Blackboard */
+.blackboard{
+  flex:1;
+  background:#1a3a2a;
+  border:3px solid #5a4a30;
+  border-radius:4px;
+  box-shadow:inset 0 0 30px rgba(0,0,0,.5), 0 4px 20px rgba(0,0,0,.4);
+  padding:16px 20px;
+  position:relative;
+  min-height:clamp(180px,24vw,320px);
+  overflow:hidden;
+}
+.blackboard::before{
+  /* chalk dust texture */
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(
+    0deg,transparent,transparent 2px,rgba(255,255,255,.01) 2px,rgba(255,255,255,.01) 4px
+  );
+  pointer-events:none;
+}
+.chalk-line{
+  font-family:'Courier New',monospace;
+  font-size:clamp(14px,2vw,26px);
+  color:rgba(255,255,255,.88);
+  line-height:1.9;
+  white-space:nowrap;
+  overflow:hidden;
+  max-width:0;
+  display:block;
+  text-shadow:0 0 8px rgba(255,255,255,.3);
+  transition:none; /* controlled by JS */
+}
+.chalk-line.color-yellow{color:rgba(255,230,100,.9);text-shadow:0 0 8px rgba(255,220,0,.4)}
+.chalk-line.color-blue{color:rgba(140,200,255,.9);text-shadow:0 0 8px rgba(100,180,255,.4)}
+.chalk-line.color-pink{color:rgba(255,160,180,.9);text-shadow:0 0 8px rgba(255,120,150,.4)}
+/* Chalk cursor blinking */
+.chalk-cursor{
+  display:inline-block;width:2px;height:1.1em;
+  background:rgba(255,255,255,.8);vertical-align:middle;
+  animation:chalk-blink .5s ease-in-out infinite;margin-left:2px;
+}
+@keyframes chalk-blink{0%,100%{opacity:1}50%{opacity:0}}
+/* Eraser sweep */
+.eraser{
+  position:absolute;top:0;right:-60px;width:50px;height:100%;
+  background:linear-gradient(90deg,rgba(26,58,42,0) 0%,rgba(26,58,42,.95) 60%,rgba(26,58,42,1) 100%);
+  transition:right .8s ease;pointer-events:none;
+}
+/* Chalkboard tray at bottom */
+.blackboard-tray{
+  height:8px;background:linear-gradient(90deg,#5a4a30,#8a7050,#5a4a30);
+  border-radius:0 0 2px 2px;margin-top:4px;
+  box-shadow:0 2px 6px rgba(0,0,0,.4);
 }
 
 /* ═══════════════════════════════════════════
@@ -976,22 +1034,47 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
 <!-- ══ S8: QUESTIONNAIRE RESPONSES ════════════════════ -->
 <div class="slide" id="s8">
   <div class="slide-header"><span class="slide-brand"><strong>Polytech Lille</strong> — TOEIC Officiel</span></div>
-  <div class="card" style="display:flex;gap:28px;padding:14px 18px;width:92%;max-width:980px;align-items:flex-start">
-    <div class="card-orange-top" style="position:absolute;inset:0 0 auto;height:5px;border-radius:12px 12px 0 0"></div>
-    <div class="qr-section">
-      <div class="qr-hdr"><div class="qr-hdr-num">11</div><div class="qr-hdr-lbl">QUESTIONNAIRE RESPONSES</div></div>
+  <div class="s8-layout">
+
+    <!-- LEFT: QR grid with SVG cross -->
+    <div class="s8-left">
+      <div class="qr-hdr">
+        <div class="qr-hdr-num">11</div>
+        <div class="qr-hdr-lbl">QUESTIONNAIRE RESPONSES</div>
+      </div>
       <div class="qr-xwrap">
         <div class="qr-grid" id="qr-grid"></div>
-        <div class="qrx" id="qrx1" style="width:4px;height:0%;top:0;left:25%;transform:rotate(37deg);transform-origin:top center"></div>
-        <div class="qrx" id="qrx2" style="width:4px;height:0%;top:0;right:25%;transform:rotate(-37deg);transform-origin:top center"></div>
+        <!-- SVG cross — no red bars -->
+        <svg id="s8-cross" viewBox="0 0 100 100" preserveAspectRatio="none"
+          style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:20">
+          <line x1="3" y1="3" x2="97" y2="97" stroke="#C0392B" stroke-width="4.5" stroke-linecap="round"
+            stroke-dasharray="135" stroke-dashoffset="135">
+            <animate attributeName="stroke-dashoffset" from="135" to="0" dur="0.6s"
+              begin="indefinite" fill="freeze" id="s8cl1"/>
+          </line>
+          <line x1="97" y1="3" x2="3" y2="97" stroke="#C0392B" stroke-width="4.5" stroke-linecap="round"
+            stroke-dasharray="135" stroke-dashoffset="135">
+            <animate attributeName="stroke-dashoffset" from="135" to="0" dur="0.6s"
+              begin="indefinite" fill="freeze" id="s8cl2"/>
+          </line>
+        </svg>
       </div>
     </div>
+
+    <!-- RIGHT: note + blackboard -->
     <div class="s8-right">
-      <div class="s8-note">À compléter avec le<br><strong>questionnaire plastifié</strong><br>sur vos tables</div>
-      <div class="plastif-icon">📋</div>
-      <div id="algo-display" style="font-family:monospace;font-size:clamp(11px,1.4vw,16px);color:#4ade80;background:rgba(0,0,0,.3);border-radius:8px;padding:10px 14px;min-width:220px;text-align:left;line-height:1.8;letter-spacing:1px"></div>
-      <div style="font-size:clamp(10px,1.3vw,14px);color:#888;text-align:center">(statistiques ETC uniquement)</div>
+      <div class="s8-note-pill">
+        À compléter avec le <strong>questionnaire plastifié</strong> sur vos tables<br>
+        <span style="font-size:.8em;color:rgba(255,255,255,.5)">(statistiques ETC uniquement — détendez-vous 😄)</span>
+      </div>
+
+      <div class="blackboard" id="blackboard">
+        <span id="chalk-cursor-top" class="chalk-cursor" style="position:absolute;top:16px;left:20px"></span>
+        <!-- lines written by JS -->
+      </div>
+      <div class="blackboard-tray"></div>
     </div>
+
   </div>
 </div>
 
@@ -1559,6 +1642,9 @@ async function animateS7(){
 /* ══════════════════════════════════════════
    SLIDE 8 — QR X + stats bars
 ══════════════════════════════════════════ */
+/* ══════════════════════════════════════════
+   SLIDE 8 — QR SVG cross + Blackboard
+══════════════════════════════════════════ */
 function buildQRGrid(){
   const grid=document.getElementById('qr-grid');grid.innerHTML='';
   for(let q=1;q<=17;q++){
@@ -1568,46 +1654,105 @@ function buildQRGrid(){
     grid.appendChild(row);
   }
 }
+
 let s8LoopTimer=null;
 let algoInterval=null;
-const ALGO_LINES=[
-  'ETS_STATS.compute()',
-  'Σ score_i / n = μ',
-  'f(x) = ax² + bx + c',
-  '0110 1001 0011 1010',
-  'CECRL_level(μ) → B1',
-  '1001 0110 1100 0101',
-  'variance(X) < 0.02',
-  'P(L>495) = 0.73',
-  '0010 1111 0101 1000',
-  'norm.dist(μ, σ²)',
+
+// Formulas to write on the blackboard
+const CHALK_FORMULAS=[
+  {text:"E = mc²",           cls:"color-yellow"},
+  {text:"F = ma",            cls:""},
+  {text:"∫f(x)dx = F(b)-F(a)",cls:"color-blue"},
+  {text:"∇·E = ρ/ε₀",       cls:"color-pink"},
+  {text:"σ = F/A",           cls:""},
+  {text:"PV = nRT",          cls:"color-yellow"},
+  {text:"ΔS ≥ 0",            cls:"color-pink"},
+  {text:"Z = R + jX",        cls:"color-blue"},
+  {text:"τ = r × F",         cls:""},
+  {text:"λ = h/mv",          cls:"color-yellow"},
+  {text:"div(B) = 0",        cls:"color-blue"},
+  {text:"Σ F = 0  → équilibre",cls:"color-pink"},
 ];
-function startAlgo(){startAlgoEl('algo-display');}
-function startAlgoEl(elId){
-  stopAlgo();
-  const el=document.getElementById(elId);
-  if(!el)return;
-  let li=0;
-  algoInterval=setInterval(()=>{
-    const lines=ALGO_LINES.slice(li%ALGO_LINES.length,(li%ALGO_LINES.length)+4);
-    el.innerHTML=lines.map((l,i)=>`<div style="opacity:${1-i*0.18};color:${i===0?'#4ade80':'#22d3ee'}">${l}</div>`).join('');
-    li++;
-  },650);
+
+let chalkRunning=false;
+async function runChalkboard(){
+  chalkRunning=true;
+  const board=document.getElementById('blackboard');
+  if(!board){chalkRunning=false;return;}
+
+  while(chalkRunning){
+    board.innerHTML='';
+    // Pick 4 random formulas
+    const shuffled=[...CHALK_FORMULAS].sort(()=>Math.random()-.5).slice(0,4);
+
+    for(let i=0;i<shuffled.length;i++){
+      if(!chalkRunning)break;
+      const f=shuffled[i];
+      // Create line element
+      const line=document.createElement('span');
+      line.className='chalk-line'+(f.cls?' '+f.cls:'');
+      board.appendChild(line);
+
+      // Create cursor at end of this line
+      const cur=document.createElement('span');
+      cur.className='chalk-cursor';
+      board.appendChild(cur);
+
+      // Write char by char
+      const txt=f.text;
+      for(let ci=0;ci<txt.length;ci++){
+        if(!chalkRunning)break;
+        line.textContent=txt.slice(0,ci+1);
+        line.style.maxWidth='100%';
+        await delay(60+Math.random()*40);
+      }
+      // Remove cursor, add line break pause
+      cur.remove();
+      const br=document.createElement('br');
+      board.appendChild(br);
+      await delay(500);
+    }
+
+    // Hold finished board for a moment
+    await delay(2500);
+    if(!chalkRunning)break;
+
+    // Erase: add an eraser div that sweeps right-to-left
+    const eraser=document.createElement('div');
+    eraser.style.cssText='position:absolute;top:0;right:100%;width:100%;height:100%;background:linear-gradient(90deg,rgba(26,58,42,0) 0%,rgba(26,58,42,1) 40%);transition:right .9s ease;pointer-events:none;z-index:5';
+    board.appendChild(eraser);
+    await delay(50);
+    eraser.style.right='0%';
+    await delay(1000);
+    board.innerHTML='';
+    await delay(300);
+  }
 }
-function stopAlgo(){clearInterval(algoInterval);}
+function stopChalk(){chalkRunning=false;}
+
+// Keep startAlgo/stopAlgo stubs so existing calls don't break
+function startAlgo(){}
+function startAlgoEl(){}
+function stopAlgo(){stopChalk();}
+
+function triggerS8Cross(){
+  const l1=document.getElementById('s8cl1');
+  const l2=document.getElementById('s8cl2');
+  // Reset dashoffset first
+  l1&&l1.parentElement.setAttribute('stroke-dashoffset','135');
+  l2&&l2.parentElement.setAttribute('stroke-dashoffset','135');
+  if(l1){l1.setAttribute('begin','indefinite');l1.beginElement();}
+  setTimeout(()=>{if(l2){l2.setAttribute('begin','indefinite');l2.beginElement();}},700);
+}
 
 async function animateS8(){
   clearTimeout(s8LoopTimer);
-  const x1=document.getElementById('qrx1'),x2=document.getElementById('qrx2');
-  if(x1){x1.style.opacity='0';x1.style.height='0%';x1.style.transitionDelay='0s';}
-  if(x2){x2.style.opacity='0';x2.style.height='0%';x2.style.transitionDelay='0s';}
-  stopAlgo();startAlgo();
-
-  await delay(600);
-  if(x1){x1.style.opacity='1';x1.style.height='135%';x1.style.transitionDelay='.5s';}
-  if(x2){x2.style.opacity='1';x2.style.height='135%';x2.style.transitionDelay='.85s';}
-
-  s8LoopTimer=setTimeout(animateS8,6000);
+  triggerS8Cross();
+  stopChalk();
+  setTimeout(runChalkboard,200);
+  s8LoopTimer=setTimeout(()=>{
+    triggerS8Cross();
+  },7000);
 }
 
 /* ══════════════════════════════════════════
@@ -1839,7 +1984,7 @@ document.head.appendChild(blinkStyle);
 function stopAllLoops(){
   clearTimeout(nameLoop);clearTimeout(dobLoopTimer);clearTimeout(s7LoopTimer);
   clearTimeout(s8LoopTimer);clearTimeout(c3LoopTimer);clearTimeout(s10LoopTimer);clearTimeout(s11LoopTimer);
-  stopAlgo();
+  stopChalk();
 }
 
 function onEnter(id){
