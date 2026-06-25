@@ -603,6 +603,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
   opacity:0;transition:opacity .6s ease .2s}
 #s11.active .s11-top-msg{opacity:1}
 .fasc-card{background:#fff;border-radius:10px;box-shadow:0 6px 30px rgba(0,0,0,.3);padding:16px}
+.fascicule-card{background:#fff;border-radius:10px;box-shadow:0 6px 30px rgba(0,0,0,.3);padding:16px}
 .fasc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
 .fasc-reg-lbl{font-size:10px;color:#555;margin-bottom:3px}
 .fasc-reg-row{display:flex;gap:2px}
@@ -614,8 +615,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
 .fasc-name-typed{
   font-family:'Comic Sans MS','Segoe Script',cursive;
   font-size:clamp(16px,2.2vw,24px);font-weight:700;letter-spacing:3px;
-  color:#1a1a1a;overflow:hidden;max-width:0;white-space:nowrap;display:inline-block;
-  text-shadow:none;
+  color:#111;overflow:hidden;max-width:0;white-space:nowrap;display:inline-block;
+  background:transparent;
 }
 .fasc-barcode-area{text-align:right;font-size:11px;color:#555}
 .fasc-bars{background:#000;color:#fff;padding:2px 8px;font-size:9px;letter-spacing:3px;margin-top:4px}
@@ -1875,6 +1876,10 @@ function onEnter(id){
     case 's9':resetS9();break;
     case 's10':setTimeout(animateSig,300);break;
     case 's11':setTimeout(animateFasc,300);break;
+    case 's12':
+      // Rebuild with today's live date every time we enter
+      buildTodaySlide();
+      break;
     case 's15':
       // Show card + demo
       const s15card=document.getElementById('s15-card');
