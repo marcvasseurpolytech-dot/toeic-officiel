@@ -1936,36 +1936,10 @@ function buildTodaySlide(){
   const dayUS=String(now.getDate()).padStart(2,'0');
   const yrUS=now.getFullYear();
   const usDate=`${monUS}/${dayUS}/${yrUS}`;
-  const frDate=`${dayFr} ${monFr} ${yrFr}`;
 
-  document.getElementById('today-date-big').textContent=usDate;
-  document.getElementById('today-note').innerHTML=
-    `<span style="font-size:.85em;color:rgba(255,255,255,.6)">${frDate}</span>
-     <span style="color:var(--or);font-size:1.4em;margin:0 10px">→</span>
-     <strong style="color:#fff">${usDate}</strong>
-     <span style="color:rgba(255,255,255,.5);font-size:.8em;margin-left:8px">(MM/DD/YYYY)</span>`;
-
-  const frow=document.getElementById('today-format-row');
-  frow.innerHTML=`
-    <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
-      <span id="tok-mm" style="padding:10px 18px;border-radius:10px;background:#e65100;color:#fff;font-weight:900;font-size:clamp(24px,3.5vw,48px);animation:blink-month 1.2s ease-in-out infinite">${monUS}</span>
-      <span style="font-size:clamp(11px,1.3vw,15px);color:rgba(255,255,255,.6)">MOIS ← ici</span>
-    </div>
-    <span style="color:rgba(255,255,255,.4);font-size:clamp(22px,3vw,42px)">/</span>
-    <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
-      <span style="padding:10px 18px;border-radius:10px;background:#1b5e20;color:#fff;font-weight:900;font-size:clamp(24px,3.5vw,48px)">${dayUS}</span>
-      <span style="font-size:clamp(11px,1.3vw,15px);color:rgba(255,255,255,.6)">JOUR</span>
-    </div>
-    <span style="color:rgba(255,255,255,.4);font-size:clamp(22px,3vw,42px)">/</span>
-    <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
-      <span style="padding:10px 18px;border-radius:10px;background:#0d47a1;color:#fff;font-weight:900;font-size:clamp(24px,3.5vw,48px)">${yrUS}</span>
-      <span style="font-size:clamp(11px,1.3vw,15px);color:rgba(255,255,255,.6)">ANNÉE</span>
-    </div>
-  `;
-
-  // Update S10 date tokens with today's live date
+  // S10 tokens — always update regardless of other slides
   const setEl=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
-  setEl('s10-tok-day',      dayUS);
+  setEl('s10-tok-day',      dayFr);
   setEl('s10-tok-month',    monFrShort);
   setEl('s10-tok-year',     String(yrFr));
   setEl('s10-us-month-val', monUS);
