@@ -1150,7 +1150,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1b35;
       </div>
       <div class="s10-arrow">→</div>
       <div class="s10-tokens">
-        <div class="s10-tok t-month" style="position:relative" id="s10-us-month">10
+        <div class="s10-tok t-month" style="position:relative" id="s10-us-month"><span id="s10-us-month-val">10</span>
           <span style="position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);
             font-size:clamp(8px,.9vw,11px);color:var(--or);white-space:nowrap;font-weight:700">mois !</span>
         </div>
@@ -1963,27 +1963,15 @@ function buildTodaySlide(){
     </div>
   `;
 
-  // Helper — setFull remplace le textContent, setFirst remplace le firstChild (pour les tokens avec <span> enfant)
-  const setFull=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
-  const setFirst=(id,v)=>{const el=document.getElementById(id);if(el&&el.firstChild)el.firstChild.textContent=v;};
-
-  // S12 tokens
-  setFull('s12-tok-day',   dayUS);
-  setFull('s12-tok-month', monFrShort);
-  setFull('s12-tok-year',  String(yrFr));
-  setFull('s12-us-day',    dayUS);
-  setFull('s12-us-year',   String(yrUS));
-  setFirst('s12-us-month', monUS);
-  setFull('date-to-val',   `= ${usDate}`);
-
-  // S10 tokens
-  setFull('s10-tok-day',   dayUS);
-  setFull('s10-tok-month', monFrShort);
-  setFull('s10-tok-year',  String(yrFr));
-  setFull('s10-us-day',    dayUS);
-  setFull('s10-us-year',   String(yrUS));
-  setFirst('s10-us-month', monUS);
-  setFull('s10-date-result', `= ${usDate}`);
+  // Update S10 date tokens with today's live date
+  const setEl=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+  setEl('s10-tok-day',      dayUS);
+  setEl('s10-tok-month',    monFrShort);
+  setEl('s10-tok-year',     String(yrFr));
+  setEl('s10-us-month-val', monUS);
+  setEl('s10-us-day',       dayUS);
+  setEl('s10-us-year',      String(yrUS));
+  setEl('s10-date-result',  `= ${usDate}`);
 }
 // Add blink-month keyframe via JS (CSS not yet in stylesheet)
 const blinkStyle=document.createElement('style');
