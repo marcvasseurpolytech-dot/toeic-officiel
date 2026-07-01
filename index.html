@@ -2062,10 +2062,6 @@ function onEnter(id){
     case 's9':resetS9();break;
     case 's10':setTimeout(animateSig,300);buildTodaySlide();break;
     case 's11':setTimeout(animateFasc,300);break;
-    case 's12':
-      // Rebuild with today's live date every time we enter
-      buildTodaySlide();
-      break;
     case 's15':
       // Show card + demo
       const s15card=document.getElementById('s15-card');
@@ -2111,7 +2107,7 @@ buildCustomBox('c1-digs','c1-bubs',3);
 buildCustomBox('c2-digs','c2-bubs',3);
 buildCustomBox('c3-digs','c3-bubs',3);
 buildFascicule();
-buildTodaySlide();
+setTimeout(buildTodaySlide, 50);
 
 // Trigger s1
 setTimeout(()=>onEnter('s1'),200);
